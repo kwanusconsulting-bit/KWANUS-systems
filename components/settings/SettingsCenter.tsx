@@ -1,6 +1,6 @@
 "use client";
 
-import IdentityCard from "./IdentityCard";
+import { IdentityCard } from "./IdentityCard";
 import IdentityEdit from "./IdentityEdit";
 import EmotionalPreferences from "./EmotionalPreferences";
 import PersonaTuning from "./PersonaTuning";

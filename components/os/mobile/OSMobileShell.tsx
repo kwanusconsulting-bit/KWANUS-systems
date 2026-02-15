@@ -1,7 +1,6 @@
 "use client";
 
 import EmotionalBackground from "../EmotionalBackground";
-import { useTheme } from "@/providers/ThemeProvider";
 
 export default function OSMobileShell({ children }: { children: React.ReactNode }) {
     return (
