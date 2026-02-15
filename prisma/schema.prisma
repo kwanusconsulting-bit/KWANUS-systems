@@ -9,10 +9,13 @@ datasource db {
 
 model User {
   id        String   @id @default(cuid())
-  email     String   @unique
-  name      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  email       String   @unique
+  name        String?
+  displayName String?
+  fullName    String?
+  address     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   profile   UserProfile?
   disputes  Dispute[]
@@ -214,6 +217,7 @@ model Dispute {
   letters       Letter[]
   evidence      Evidence[]
   timeline      TimelineEvent[]
+  documents     Document[]
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
 }

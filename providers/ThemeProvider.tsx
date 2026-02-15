@@ -1,34 +1,34 @@
-"use client"
+"use client";
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { EmotionalState } from '@/lib/emotionalState';
+import { createContext, useContext, useState } from "react";
 
-type Theme = 'light' | 'dark' | 'mythic';
+const ThemeContext = createContext<any>(null);
 
-interface ThemeContextType {
-    theme: Theme;
-    setTheme: (theme: Theme) => void;
-    emotionalState: EmotionalState;
-    setEmotionalState: (state: EmotionalState) => void;
-}
-
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
-
-export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-    const [theme, setTheme] = useState<Theme>('mythic');
-    const [emotionalState, setEmotionalState] = useState<EmotionalState>('neutral');
+export function ThemeProvider({ children }: any) {
+    const [emotionalState, setEmotionalState] = useState("neutral");
+    const [personaMode, setPersonaMode] = useState("balanced");
+    const [mode, setMode] = useState("dark"); // dark | light
 
     return (
-        <ThemeContext.Provider value={{ theme, setTheme, emotionalState, setEmotionalState }}>
-            <div className={`k-theme-${theme} contents`}>
-                {children}
-            </div>
+        <ThemeContext.Provider
+            value={{
+                emotionalState,
+                setEmotionalState,
+                personaMode,
+                setPersonaMode,
+                mode,
+                setMode,
+            }}
+        >
+            {children}
         </ThemeContext.Provider>
     );
-};
+}
 
-export const useTheme = () => {
+export function useTheme() {
     const context = useContext(ThemeContext);
-    if (!context) throw new Error("useTheme must be used within a ThemeProvider");
+    if (context === undefined) {
+        throw new Error("useTheme must be used within a ThemeProvider");
+    }
     return context;
-};
+}

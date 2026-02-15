@@ -2,7 +2,7 @@
 
 import { GlassCard } from "@/components/ui";
 
-export default function IdentityCard({ user }: any) {
+export function IdentityCard({ user }: any) {
     return (
         <GlassCard className="p-8 border-white/20 relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 blur-[80px] pointer-events-none" />
@@ -16,20 +16,24 @@ export default function IdentityCard({ user }: any) {
                     )}
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-4 flex-1">
                     <div>
-                        <h2 className="text-2xl font-bold text-white tracking-tight">{user?.name || "The Steward"}</h2>
+                        <h2 className="text-2xl font-bold text-white tracking-tight">{user?.displayName || user?.name || "The Steward"}</h2>
                         <p className="text-xs text-white/40 uppercase tracking-[0.3em] font-bold mt-1">Identity Vessel</p>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-8 pt-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4 border-t border-white/5">
                         <div>
-                            <div className="text-[10px] font-bold uppercase tracking-widest text-white/30 mb-1">Pacing Layer</div>
-                            <div className="text-sm text-white/70">Verified Steward</div>
+                            <div className="text-[10px] font-bold uppercase tracking-widest text-white/30 mb-1">Ritual Name</div>
+                            <div className="text-sm text-white/70">{user?.fullName || "Awaiting Resolution"}</div>
                         </div>
                         <div>
                             <div className="text-[10px] font-bold uppercase tracking-widest text-white/30 mb-1">Signal Path</div>
-                            <div className="text-sm text-white/70 truncate max-w-[150px]">{user?.email}</div>
+                            <div className="text-sm text-white/70 truncate">{user?.email}</div>
+                        </div>
+                        <div className="sm:col-span-2">
+                            <div className="text-[10px] font-bold uppercase tracking-widest text-white/30 mb-1">Anchor Point</div>
+                            <div className="text-sm text-white/70">{user?.address || "Mobile Vessel"}</div>
                         </div>
                     </div>
                 </div>

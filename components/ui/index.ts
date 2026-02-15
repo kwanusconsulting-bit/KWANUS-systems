@@ -1,9 +1,10 @@
-// components/ui/index.ts
-export { default as GlassPanel } from "./GlassPanel";
-export { default as GlassButton } from "./GlassButton";
-export { default as GlassCard } from "./GlassCard";
-export { default as GlassInput } from "./GlassInput";
-export { default as EmotionalBadge } from "./EmotionalBadge";
-export { default as StatCard } from "./StatCard";
-export { default as TimelineItem } from "./TimelineItem";
-export { default as PageHeader } from "./PageHeader";
+export * from './GlassPanel';
+export * from './GlassCard';
+export * from './GlassButton';
+export * from './GlassInput';
+export * from './GlassBadge';
+export * from './SectionTitle';
+export * from './Divider';
+export * from './PageHeader';
+export * from './EmotionalSurface';
+export * from './PersonaText';
