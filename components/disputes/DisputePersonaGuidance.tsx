@@ -36,7 +36,7 @@ export default function DisputePersonaGuidance({ dispute }: DisputePersonaGuidan
                         {activeGuidance.title}
                     </h3>
                     <p className="text-slate-300 leading-relaxed italic font-serif">
-                        "{activeGuidance.message}"
+                        &quot;{activeGuidance.message}&quot;
                     </p>
                     <div className="mt-4 flex items-center gap-2">
                         <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />

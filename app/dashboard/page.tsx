@@ -1,25 +1,15 @@
 // app/dashboard/page.tsx
+"use client";
+
+import { usePresence } from "@/hooks/usePresence";
+import Dashboard from "@/components/dashboard/Dashboard";
+import CeremonialArrival from "@/components/os/CeremonialArrival";
+
 export default function DashboardPage() {
     return (
-        <div className="space-y-6">
-            {/* Emotional State Header */}
-            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-emerald-950/40 to-slate-900/40 p-6 backdrop-blur-xl">
-                <div className="absolute inset-0 bg-emerald-500/5" />
-                <div className="relative">
-                    <div className="flex items-center justify-between">
-                        <div>
-                            <p className="text-xs uppercase tracking-wider text-slate-400">Current State</p>
-                            <h2 className="mt-1 text-2xl font-semibold text-emerald-300">Steady & Clear</h2>
-                            <p className="mt-2 text-sm text-slate-300">
-                                The OS is pacing gently, focused on your next right action.
-                            </p>
-                        </div>
-                        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/20 ring-4 ring-emerald-500/10">
-                            <div className="h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_20px_rgba(52,211,153,0.8)]" />
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div className="space-y-6 p-6">
+            {/* Ceremonial Arrival / Emotional State Header */}
+            <CeremonialArrival />
 
             {/* Stats Grid */}
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -47,12 +37,12 @@ export default function DashboardPage() {
                     description="Securely stored"
                     color="violet"
                 />
-            </div>
+            </div >
 
             {/* Main Content Grid */}
-            <div className="grid gap-6 lg:grid-cols-3">
+            < div className="grid gap-6 lg:grid-cols-3" >
                 {/* Next Action - Takes 2 columns */}
-                <div className="lg:col-span-2">
+                < div className="lg:col-span-2" >
                     <div className="rounded-2xl border border-white/10 bg-slate-900/40 p-6 backdrop-blur-xl">
                         <div className="flex items-center justify-between">
                             <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-300">
@@ -75,10 +65,10 @@ export default function DashboardPage() {
                             </button>
                         </div>
                     </div>
-                </div>
+                </div >
 
                 {/* Timeline Preview */}
-                <div className="rounded-2xl border border-white/10 bg-slate-900/40 p-6 backdrop-blur-xl">
+                < div className="rounded-2xl border border-white/10 bg-slate-900/40 p-6 backdrop-blur-xl" >
                     <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-300">
                         Recent Activity
                     </h3>
@@ -102,17 +92,17 @@ export default function DashboardPage() {
                             color="amber"
                         />
                     </div>
-                </div>
-            </div>
+                </div >
+            </div >
 
             {/* Quick Links */}
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            < div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4" >
                 <QuickLink href="/dashboard/credit-items" label="Credit Items" icon="📊" />
                 <QuickLink href="/dashboard/disputes" label="Disputes" icon="⚖️" />
                 <QuickLink href="/dashboard/funding" label="Funding" icon="💰" />
                 <QuickLink href="/dashboard/documents" label="Documents" icon="📄" />
-            </div>
-        </div>
+            </div >
+        </div >
     );
 }
 

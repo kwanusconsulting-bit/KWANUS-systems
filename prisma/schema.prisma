@@ -31,6 +31,60 @@ model User {
   creditReports CreditReport[]
   fundingProfile FundingProfile?
   documents      Document[]
+  timelineEvents TimelineEvent[]
+  narrativeEvents NarrativeEvent[]
+  presence       Presence[]
+  emotionalHistory EmotionalRecord[]
+  personaHistory   PersonaState[]
+  kernelStates     KernelState[]
+}
+
+model KernelState {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+  emotionalState String
+  personaMode    String
+  lastInsight    String?
+  lastAction     String?
+  lastNarrative  String?
+  lastPresence   String?
+  timestamp     DateTime @default(now())
+}
+
+model Presence {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+  surface       String
+  device        String
+  emotionalState String
+  personaMode    String
+  timestamp     DateTime @default(now())
+}
+
+model EmotionalRecord {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+  state         String
+  intensity     Int
+  cause         String
+  transitionFrom String?
+  transitionTo   String?
+  timestamp     DateTime @default(now())
+}
+
+model PersonaState {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  mode      String
+  tone      String
+  pacing    String
+  motion    String
+  color     String
+  timestamp DateTime @default(now())
 }
 
 model Document {
@@ -193,11 +247,24 @@ model BureauResponse {
 }
 
 model TimelineEvent {
-  id        String        @id @default(cuid())
-  disputeId String
-  dispute   Dispute       @relation(fields: [disputeId], references: [id])
-  type      TimelineEventType   // Using String for flexibility with getAdaptivePacing logic
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  disputeId String?
+  dispute   Dispute?  @relation(fields: [disputeId], references: [id])
+  title     String
   message   String
+  type      String   // progress | insight | milestone | emotional | system
+  createdAt DateTime @default(now())
+}
+
+model NarrativeEvent {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  arc       String   // emotional | repair | expansion | etc.
+  message   String
+  type      String   // progress | insight | milestone | emotional | system
   createdAt DateTime @default(now())
 }
 

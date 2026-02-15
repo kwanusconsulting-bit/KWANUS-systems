@@ -15,6 +15,11 @@ export default async function DocumentsPage() {
 
     return (
         <div className="space-y-6">
+            <PageHeader
+                ritualTitle="CEREMONIAL ARCHIVE"
+                title="Documents"
+                subtitle="Your secure vault of historical and active lineage"
+            />
             <DocumentsGrid documents={documents} />
         </div>
     );

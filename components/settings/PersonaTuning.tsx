@@ -16,7 +16,7 @@ export default function PersonaTuning() {
             <div className="flex items-center justify-between mb-8">
                 <div>
                     <h2 className="text-xl font-bold text-white tracking-tight">Persona Modulation</h2>
-                    <p className="text-xs text-white/40 uppercase tracking-widest mt-1">Choose your steward's vocal layer</p>
+                    <p className="text-xs text-white/40 uppercase tracking-widest mt-1">Choose your steward&apos;s vocal layer</p>
                 </div>
                 <div className="h-10 w-10 rounded-full bg-white/5 flex items-center justify-center text-xl">🎙️</div>
             </div>

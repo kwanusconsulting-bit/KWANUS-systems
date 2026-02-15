@@ -2,6 +2,7 @@ export const dynamic = "force-dynamic";
 import { prisma } from "@/lib/prisma";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import SettingsCenter from "@/components/settings/SettingsCenter";
+import { PageHeader } from "@/components/ui/PageHeader";
 
 export default async function SettingsPage() {
     const { userId } = await auth();
@@ -24,5 +25,14 @@ export default async function SettingsPage() {
         imageUrl: clerkUser?.imageUrl,
     };
 
-    return <SettingsCenter user={mergedUser} />;
+    return (
+        <div className="space-y-6">
+            <PageHeader
+                ritualTitle="IDENTITY CHAMBER"
+                title="Settings"
+                subtitle="Calibrate your presence and align your system identity"
+            />
+            <SettingsCenter user={mergedUser} />
+        </div>
+    );
 }

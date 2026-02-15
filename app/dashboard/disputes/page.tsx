@@ -1,9 +1,9 @@
 export const dynamic = "force-dynamic";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
-import PageHeader from "@/components/ui/PageHeader";
-import GlassCard from "@/components/ui/GlassCard";
-import GlassButton from "@/components/ui/GlassButton";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { GlassCard } from "@/components/ui/GlassCard";
+import { GlassButton } from "@/components/ui/GlassButton";
 
 export default async function DisputesPage() {
     const { userId } = await auth();
@@ -24,6 +24,7 @@ export default async function DisputesPage() {
     return (
         <div className="space-y-6">
             <PageHeader
+                ritualTitle="REPAIR RITUAL"
                 title="Disputes"
                 subtitle="Track and manage disputes against bureaus and creditors"
                 action={

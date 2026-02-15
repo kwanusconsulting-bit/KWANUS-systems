@@ -128,6 +128,56 @@ html.dark {
   box-shadow: 0 0 40px rgba(244, 114, 182, 0.3);
 }
 
+/* Emotional transition pulse */
+.emotional-transition {
+  animation: emotionalPulse 1.2s ease-out;
+}
+
+@keyframes emotionalPulse {
+  0% {
+    opacity: 0.6;
+    transform: scale(0.98);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Persona motion v2 */
+.persona-soft-motion {
+  transition-timing-function: ease-in-out;
+  transform: translateY(0);
+}
+
+.persona-balanced-motion {
+  transition-timing-function: ease-out;
+}
+
+.persona-direct-motion {
+  transition-timing-function: cubic-bezier(0.2, 0.8, 0.4, 1);
+  transform: translateY(-1px);
+}
+
+/* Persona color v2 */
+.persona-soft-color {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.persona-balanced-color {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.persona-direct-color {
+  color: white;
+}
+
 .emotional-glow-thriving {
   box-shadow: 0 0 40px rgba(16, 185, 129, 0.35);
 }
