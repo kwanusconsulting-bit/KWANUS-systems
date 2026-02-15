@@ -62,7 +62,7 @@ export default function CeremonialArrival() {
                                 KWANUS OS AWAKENING
                             </PersonaText>
                             <PersonaText className="text-3xl font-light text-white leading-relaxed italic max-w-2xl">
-                                "{kernel.firstWords || "I am here with you. Let's begin."}"
+                                &quot;{kernel.firstWords || "I am here with you. Let's begin."}&quot;
                             </PersonaText>
                         </motion.div>
                     </motion.div>
@@ -96,7 +96,7 @@ export default function CeremonialArrival() {
                                 {emotionalInsight?.state || "Steady & Clear"}
                             </PersonaText>
                             <PersonaText className="text-sm text-white/50 leading-relaxed italic pr-8">
-                                "{emotionalInsight?.guidance || "The OS is pacing gently, focused on your next right action."}"
+                                &quot;{emotionalInsight?.guidance || "The OS is pacing gently, focused on your next right action."}&quot;
                             </PersonaText>
                         </div>
                     </div>
@@ -107,7 +107,7 @@ export default function CeremonialArrival() {
                                 <span className="w-4 h-px bg-white/20" /> {personaProfile?.voice || "COMPANION"} WHISPER
                             </PersonaText>
                             <PersonaText className="text-lg text-white/90 font-serif leading-relaxed italic">
-                                "{predictive?.insight || "Observe while the universe aligns."}"
+                                &quot;{predictive?.insight || "Observe while the universe aligns."}&quot;
                             </PersonaText>
                             <div className="pt-2">
                                 <motion.div

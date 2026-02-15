@@ -31,7 +31,7 @@ export default function StepComplete() {
                 </div>
 
                 <p className="text-slate-400 text-sm italic font-serif max-w-[280px] mx-auto leading-relaxed">
-                    "Welcome to KWANUS OS. I’ll guide you from here."
+                    &quot;Welcome to KWANUS OS. I’ll guide you from here.&quot;
                 </p>
             </div>
 

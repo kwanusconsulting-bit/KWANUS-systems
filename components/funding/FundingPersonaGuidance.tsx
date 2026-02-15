@@ -39,7 +39,7 @@ export default function FundingPersonaGuidance({ app }: FundingPersonaGuidancePr
                         {activeGuidance.title}
                     </h3>
                     <p className="text-slate-300 leading-relaxed italic text-lg opacity-80 font-serif">
-                        "{activeGuidance.message}"
+                        &quot;{activeGuidance.message}&quot;
                     </p>
                     <div className="mt-6 flex items-center gap-3">
                         <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]" />

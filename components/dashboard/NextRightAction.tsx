@@ -51,7 +51,7 @@ export default function NextRightAction() {
                         {next}
                     </p>
                     <PersonaText className="text-xs text-white/40 mt-4 italic">
-                        "One intentional movement changes the geometry of the universe."
+                        &quot;One intentional movement changes the geometry of the universe.&quot;
                     </PersonaText>
                 </motion.div>
             </AnimatePresence>
