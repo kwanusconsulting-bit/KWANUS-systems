@@ -1,9 +1,5 @@
 {
-    "compilerOptions": {
-        "paths": {
-            "@/*": [
-                "./*"
-            ]
-        }
-    }
+    "buildCommand": "npm run build",
+    "outputDirectory": ".next",
+    "framework": "nextjs"
 }
