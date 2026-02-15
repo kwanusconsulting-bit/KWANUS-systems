@@ -1,6 +1,5 @@
 "use client";
 
-import { useTheme } from "@/lib/emotionalTheme";
 import { GlassCard } from "@/components/ui";
 
 interface DisputePersonaGuidanceProps {

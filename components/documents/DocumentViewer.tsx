@@ -9,7 +9,6 @@ interface DocumentViewerProps {
 export default function DocumentViewer({ document }: DocumentViewerProps) {
     // Mocking the document URL/path for display
     // In a real scenario, this would be a link to a blob or PDF
-    const isPDF = document.type === 'pdf';
 
     return (
         <GlassPanel className="overflow-hidden border-white/20 shadow-2xl">

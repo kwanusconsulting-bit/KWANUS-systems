@@ -1,13 +1,15 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import DisputeStageTracker from "./DisputeStageTracker";
 import DisputePersonaGuidance from "./DisputePersonaGuidance";
-import DocumentViewer from "../documents/DocumentViewer";
+import DocumentViewer from "@/components/documents/DocumentViewer";
 import { GlassCard, GlassPanel, PageHeader } from "@/components/ui";
 
 export default function DisputeWorkspace({ dispute }: any) {
-    const [selectedDoc, setSelectedDoc] = useState(dispute?.documents?.[0] || null);
+    const documents = dispute?.evidence || [];
+    const [selectedDoc, setSelectedDoc] = useState(documents[0] || null);
 
     if (!dispute) return (
         <div className="p-20 text-center">
@@ -50,8 +52,8 @@ export default function DisputeWorkspace({ dispute }: any) {
                 <div className="space-y-6">
                     <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-white/40 ml-2">Evidence Vessels</h3>
                     <div className="grid grid-cols-1 gap-4">
-                        {dispute.documents?.length > 0 ? (
-                            dispute.documents.map((doc: any) => (
+                        {documents?.length > 0 ? (
+                            documents.map((doc: any) => (
                                 <button
                                     key={doc.id}
                                     onClick={() => setSelectedDoc(doc)}

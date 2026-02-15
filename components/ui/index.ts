@@ -6,3 +6,4 @@ export { default as GlassInput } from "./GlassInput";
 export { default as EmotionalBadge } from "./EmotionalBadge";
 export { default as StatCard } from "./StatCard";
 export { default as TimelineItem } from "./TimelineItem";
+export { default as PageHeader } from "./PageHeader";
