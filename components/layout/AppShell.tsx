@@ -39,16 +39,16 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
     return (
         <div className={`flex min-h-screen transition-colors duration-1000 ${currentTheme.bg} ${currentTheme.text}`}>
             <Sidebar theme={currentTheme} />
-            <main className="flex-1 overflow-y-auto relative">
-                <div className="sticky top-0 z-40 flex items-center justify-between px-8 py-4 bg-transparent pointer-events-none">
-                    <div className="w-80 pointer-events-auto">
+            <main className="flex-1 overflow-y-auto overflow-x-hidden relative">
+                <div className="sticky top-0 z-40 flex items-center justify-between px-4 md:px-8 py-3 md:py-4 bg-transparent pointer-events-none">
+                    <div className="w-full md:w-80 pointer-events-auto">
                         <GlobalSearch />
                     </div>
-                    <div className="pointer-events-auto">
+                    <div className="pointer-events-auto ml-4">
                         <NotificationBell />
                     </div>
                 </div>
-                <div className="p-8 max-w-6xl mx-auto">
+                <div className="px-4 md:px-6 lg:px-8 py-4 md:py-6 max-w-7xl mx-auto w-full">
                     {children}
                 </div>
             </main>
