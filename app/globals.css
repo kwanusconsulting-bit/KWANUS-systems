@@ -20,9 +20,60 @@ div {
   font-weight: 400;
 }
 
-/* Ceremonial Motion */
+/* Global motion system */
 * {
-  transition: all 0.25s ease-out;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-duration: 250ms;
+  transition-timing-function: ease-out;
+}
+
+/* Emotional motion */
+.motion-worst {
+  transition-duration: 400ms;
+  transform: translateY(1px);
+}
+
+.motion-neutral {
+  transition-duration: 300ms;
+}
+
+.motion-progressing {
+  transition-duration: 200ms;
+  transform: translateY(-1px);
+}
+
+.motion-thriving {
+  transition-duration: 150ms;
+  transform: translateY(-2px) scale(1.01);
+}
+
+/* Persona motion */
+.persona-soft-motion {
+  transition-timing-function: ease-in-out;
+  opacity: 0.9;
+}
+
+.persona-balanced-motion {
+  transition-timing-function: ease-out;
+}
+
+.persona-direct-motion {
+  transition-timing-function: cubic-bezier(0.2, 0.8, 0.4, 1);
+  transform: translateY(-1px);
+}
+
+/* Page transitions */
+.page-enter {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: pageFadeIn 0.5s forwards;
+}
+
+@keyframes pageFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Emotional Hover States */
