@@ -1,0 +1,182 @@
+:root {
+    /* 1. COLOR TOKENS (Base Palette) */
+    --color-base-white: #ffffff;
+    --color-base-black: #000000;
+
+    --color-base-blue-100: #dbeafe;
+    --color-base-blue-500: #3b82f6;
+    --color-base-blue-900: #1e3a8a;
+
+    --color-base-coral-100: #ffedd5;
+    --color-base-coral-500: #f97316;
+    --color-base-coral-900: #7c2d12;
+
+    --color-base-emerald-100: #d1fae5;
+    --color-base-emerald-500: #10b981;
+    --color-base-emerald-900: #064e3b;
+
+    --color-base-beige-100: #f5f5f4;
+    --color-base-beige-500: #78716c;
+    --color-base-beige-900: #1c1917;
+
+    /* 2. TYPOGRAPHY TOKENS */
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-serif: 'Georgia', serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 1.875rem;
+
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-black: 900;
+
+    --font-line-tight: 1.2;
+    --font-line-normal: 1.5;
+    --font-line-relaxed: 1.75;
+
+    /* 3. SPACING TOKENS (Adaptive 4px scale) */
+    --ui-spacing-multiplier: 1;
+    --space-base: calc(4px * var(--ui-spacing-multiplier));
+
+    --space-0: 0px;
+    --space-1: calc(1 * var(--space-base));
+    --space-2: calc(2 * var(--space-base));
+    --space-3: calc(3 * var(--space-base));
+    --space-4: calc(4 * var(--space-base));
+    --space-6: calc(6 * var(--space-base));
+    --space-8: calc(8 * var(--space-base));
+    --space-12: calc(12 * var(--space-base));
+    --space-16: calc(16 * var(--space-base));
+
+    /* 4. RADIUS TOKENS */
+    --radius-none: 0px;
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-full: 9999px;
+
+    /* 5. MOTION TOKENS (Ceremonial) */
+    --motion-duration-fast: 120ms;
+    --motion-duration-normal: 200ms;
+    --motion-duration-slow: 300ms;
+
+    --motion-ease-in: cubic-bezier(0.5, 0, 0.75, 0);
+    --motion-ease-out: cubic-bezier(0, 0.5, 0.25, 1);
+    --motion-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* DEFAULT UI STATE (Neutral) */
+    --ui-background: var(--color-base-black);
+    --ui-surface: rgba(255, 255, 255, 0.05);
+    --ui-border: rgba(255, 255, 255, 0.1);
+    --ui-text-primary: var(--color-base-white);
+    --ui-text-secondary: rgba(255, 255, 255, 0.4);
+    --ui-accent: var(--color-base-blue-500);
+}
+
+/* 6. EMOTIONAL-ADAPTIVE MODES */
+.k-mode-worst {
+    --ui-accent: var(--color-base-blue-500);
+    --ui-glow: rgba(59, 130, 246, 0.2);
+    --motion-duration-base: 400ms;
+    --ui-spacing-multiplier: 1.5;
+}
+
+.k-mode-neutral {
+    --ui-accent: var(--color-base-beige-500);
+    --ui-glow: rgba(120, 113, 108, 0.2);
+}
+
+.k-mode-progressing {
+    --ui-accent: var(--color-base-coral-500);
+    --ui-glow: rgba(249, 115, 22, 0.2);
+}
+
+.k-mode-thriving {
+    --ui-accent: var(--color-base-emerald-500);
+    --ui-glow: rgba(16, 185, 129, 0.3);
+    --ui-spacing-multiplier: 0.8;
+}
+
+/* 7. GLOBAL UTILITIES */
+.k-glass-panel {
+    background: var(--ui-surface);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--ui-border);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 4px 24px -12px var(--ui-glow);
+    transition: all var(--motion-duration-normal) var(--motion-ease-in-out);
+}
+
+.k-accent {
+    color: var(--ui-accent);
+}
+
+.k-accent-bg {
+    background-color: var(--ui-accent);
+}
+
+.k-text-primary {
+    color: var(--ui-text-primary);
+}
+
+.k-text-secondary {
+    color: var(--ui-text-secondary);
+}
+
+.animate-k-fade {
+    animation: k-fade-in var(--motion-duration-normal) var(--motion-ease-in-out) forwards;
+}
+
+@keyframes k-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(var(--space-2));
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 8. MYTHIC GEOMETRY */
+.k-mythic-arc {
+    border-radius: 50%;
+    border: 1px solid var(--ui-border);
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    opacity: 0.1;
+}
+
+.k-harmonic-line {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--ui-accent), transparent);
+    opacity: 0.2;
+}
+
+.k-pulse-ceremony {
+    animation: k-pulse-soft 4s infinite ease-in-out;
+}
+
+@keyframes k-pulse-soft {
+
+    0%,
+    100% {
+        opacity: 0.05;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.15;
+        transform: scale(1.02);
+    }
+}

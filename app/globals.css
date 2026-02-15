@@ -1,0 +1,86 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+:root {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    /* Coral Palette */
+    --coral-950: #2b0f0f;
+    --coral-900: #3d1515;
+    --coral-800: #5a1e1e;
+    --coral-500: #ff6b6b;
+    --coral-300: #f7a8a1;
+    --coral-100: #ffd7d2;
+
+    /* Emerald Palette */
+    --emerald-950: #064e3b;
+    --emerald-900: #065f46;
+    --emerald-800: #066e51;
+    --emerald-500: #10b981;
+    --emerald-300: #6ee7b7;
+    --emerald-100: #d1fae5;
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+}
+
+/* Custom Utilities for Coral/Emerald */
+.bg-coral-950 {
+    background-color: var(--coral-950);
+}
+
+.bg-coral-900\/40 {
+    background-color: rgba(61, 21, 21, 0.4);
+}
+
+.border-coral-800 {
+    border-color: var(--coral-800);
+}
+
+.text-coral-100 {
+    color: var(--coral-100);
+}
+
+.text-coral-300 {
+    color: var(--coral-300);
+}
+
+.bg-coral-500 {
+    background-color: var(--coral-500);
+}
+
+.bg-emerald-950 {
+    background-color: var(--emerald-950);
+}
+
+.bg-emerald-900\/40 {
+    background-color: rgba(6, 95, 70, 0.4);
+}
+
+.border-emerald-800 {
+    border-color: var(--emerald-800);
+}
+
+.text-emerald-100 {
+    color: var(--emerald-100);
+}
+
+.text-emerald-300 {
+    color: var(--emerald-300);
+}
+
+.bg-emerald-500 {
+    background-color: var(--emerald-500);
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+}

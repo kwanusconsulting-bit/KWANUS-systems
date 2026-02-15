@@ -1,0 +1,29 @@
+:root {
+    /* 1. COLOR TOKENS (Emotional-Adaptive) */
+    --k-worst: #3b82f6;
+    /* Cool Blue */
+    --k-neutral: #78716c;
+    /* Gray-Beige */
+    --k-progressing: #f97316;
+    /* Warm Coral */
+    --k-thriving: #10b981;
+    /* Vibrant Emerald */
+
+    /* 2. SPACING SCALE (4px base) */
+    --k-space-1: 4px;
+    --k-space-2: 8px;
+    --k-space-4: 16px;
+    --k-space-8: 32px;
+    --k-space-12: 48px;
+
+    /* 3. TYPOGRAPHY SCALE */
+    --k-font-display: 'Inter', system-ui;
+    --k-size-sm: 0.875rem;
+    --k-size-base: 1rem;
+    --k-size-xl: 1.25rem;
+    --k-size-2xl: 1.5rem;
+
+    /* 4. MOTION TOKENS */
+    --k-ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --k-duration: 200ms;
+}

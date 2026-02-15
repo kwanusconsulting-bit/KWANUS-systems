@@ -1,0 +1,18 @@
+@import './reset.css';
+@import './tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: var(--k-neutral);
+  color: white;
+  font-family: var(--k-font-display);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--k-thriving);
+  color: black;
+}

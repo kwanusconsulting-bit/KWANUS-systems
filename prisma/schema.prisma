@@ -1,0 +1,299 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  profile   UserProfile?
+  disputes  Dispute[]
+  fundings  FundingApplication[]
+  creditItems CreditItem[]
+  activities  Activity[]
+  notifications Notification[]
+  settings    UserSettings?
+  creditProfiles CreditProfile[]
+  emotionalSnapshots EmotionalSnapshot[]
+  journeys    Journey[]
+  systemEvents SystemEvent[]
+  creditReports CreditReport[]
+  fundingProfile FundingProfile?
+}
+
+model UserProfile {
+  id          String   @id @default(cuid())
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String   @unique
+  emailFallback String? // Fallback for profile creation if needed
+  emotionalNote String? // short emotional context / pacing note
+  story       String?   // user’s narrative / identity story
+  emotionalState EmotionalState @default(NEUTRAL) // WORST, NEUTRAL, PROGRESSING, THRIVING
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model SystemEvent {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  type      String
+  details   String?
+  createdAt DateTime @default(now())
+}
+
+model CreditReport {
+  id          String       @id @default(cuid())
+  userId      String
+  user        User         @relation(fields: [userId], references: [id])
+  source      String?      // e.g. uploaded_pdf
+  fileUrl     String?
+  rawText     String?
+  items       CreditItem[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model FundingProfile {
+  id           String               @id @default(cuid())
+  userId       String               @unique
+  user         User                 @relation(fields: [userId], references: [id])
+  score        Int?
+  applications FundingApplication[]
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+}
+
+model Bank {
+  id        String        @id @default(cuid())
+  name      String
+  products  BankProduct[]
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+}
+
+model BankProduct {
+  id        String   @id @default(cuid())
+  bankId    String
+  bank      Bank     @relation(fields: [bankId], references: [id])
+  name      String
+  minScore  Int
+  maxScore  Int
+  maxAmount Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum DisputeStatus {
+  PENDING
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  REJECTED
+}
+
+enum RoundStatus {
+  DRAFT
+  SUBMITTED
+  COMPLETED
+}
+
+enum EmotionalState {
+  WORST
+  NEUTRAL
+  PROGRESSING
+  THRIVING
+}
+
+enum TimelineEventType {
+  STATUS_CHANGED
+  ROUND_CREATED
+  ROUND_SUBMITTED
+  EVIDENCE_ADDED
+  BUREAU_RESPONSE
+}
+
+enum BureauStatus {
+  VERIFIED
+  DELETED
+  UPDATED
+}
+
+model DisputeRound {
+  id              String           @id @default(cuid())
+  disputeId       String
+  dispute         Dispute          @relation(fields: [disputeId], references: [id])
+  roundNumber     Int
+  status          RoundStatus      @default(DRAFT) // DRAFT, SUBMITTED, COMPLETED
+  submittedAt     DateTime?
+  bureauResponses BureauResponse[]
+  evidence        Evidence[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+}
+
+model Letter {
+  id        String   @id @default(cuid())
+  disputeId String
+  dispute   Dispute  @relation(fields: [disputeId], references: [id])
+  type      String   // INITIAL, FOLLOWUP, etc.
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Evidence {
+  id        String        @id @default(cuid())
+  disputeId String?
+  dispute   Dispute?      @relation(fields: [disputeId], references: [id])
+  roundId   String?
+  round     DisputeRound? @relation(fields: [roundId], references: [id])
+  itemId    String?
+  item      CreditItem?   @relation(fields: [itemId], references: [id])
+  url       String
+  type      String        // IDENTITY, ADDRESS, ACCOUNT, etc.
+  createdAt DateTime      @default(now())
+}
+
+model BureauResponse {
+  id        String       @id @default(cuid())
+  roundId   String
+  round     DisputeRound @relation(fields: [roundId], references: [id])
+  bureau    String       // EXPERIAN, EQUIFAX, TRANSUNION
+  status    BureauStatus // VERIFIED, DELETED, UPDATED
+  message   String?
+  createdAt DateTime     @default(now())
+}
+
+model TimelineEvent {
+  id        String        @id @default(cuid())
+  disputeId String
+  dispute   Dispute       @relation(fields: [disputeId], references: [id])
+  type      TimelineEventType   // Using String for flexibility with getAdaptivePacing logic
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model Dispute {
+  id            String        @id @default(cuid())
+  user          User          @relation(fields: [userId], references: [id])
+  userId        String
+  bureau        String        // EXPERIAN, EQUIFAX, TRANSUNION, OTHER
+  creditorName  String
+  accountNumber String?
+  reason        String
+  status        DisputeStatus @default(OPEN) // OPEN, IN_PROGRESS, RESOLVED, REJECTED
+  emotionalTone String?       // optional emotional tag
+  creditItemId  String?
+  creditItem    CreditItem?   @relation(fields: [creditItemId], references: [id])
+  rounds        DisputeRound[]
+  letters       Letter[]
+  evidence      Evidence[]
+  timeline      TimelineEvent[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model FundingApplication {
+  id              String              @id @default(cuid())
+  user            User                @relation(fields: [userId], references: [id])
+  userId          String
+  profileId       String?
+  productId       String?
+  productType     String              // CREDIT_CARD, LINE_OF_CREDIT, TERM_LOAN, GRANT, OTHER
+  requestedAmount Float
+  status          String              @default("PENDING") // PENDING, APPROVED, DECLINED, WITHDRAWN
+  fundingType     String              @default("PERSONAL")
+  notes           String?
+  emotionalTone   String?
+  fundingProfileId String?
+  fundingProfile   FundingProfile?    @relation(fields: [fundingProfileId], references: [id])
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+}
+
+model CreditItem {
+  id            String        @id @default(cuid())
+  user          User          @relation(fields: [userId], references: [id])
+  userId        String
+  reportId      String?
+  creditorName  String
+  accountNumber String?
+  balance       Float?
+  status        String        @default("OPEN") // OPEN, CLOSED, CHARGED_OFF, COLLECTION
+  emotionalTone String?
+  isNegative    Boolean       @default(false)
+  isDisputed    Boolean       @default(false)
+  disputes      Dispute[]
+  evidence      Evidence[]
+  report        CreditReport? @relation(fields: [reportId], references: [id])
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model Activity {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  type      String   // CREDIT_ITEM_CREATED, DISPUTE_CREATED, etc.
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model UserSettings {
+  id                     String   @id @default(cuid())
+  user                   User     @relation(fields: [userId], references: [id])
+  userId                 String   @unique
+  themeOverride          String   @default("SYSTEM") // SYSTEM, LIGHT, DARK
+  notificationsEnabled   Boolean  @default(true)
+  emotionalEngineEnabled Boolean  @default(true)
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+}
+
+model CreditProfile {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  score     Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model EmotionalSnapshot {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  mode      String   // neutral, positive, negative, etc.
+  intensity Float    // 0.0 to 1.0
+  notes     String?
+  createdAt DateTime @default(now())
+}
+
+model Journey {
+  id          String   @id @default(cuid())
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
+  title       String
+  description String?
+  status      String   @default("ACTIVE") // ACTIVE, COMPLETED, ARCHIVED
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

@@ -1,0 +1,11 @@
+module.exports = {
+    root: true,
+    extends: ["next/core-web-vitals"],
+    parserOptions: {
+        ecmaVersion: 2022,
+        sourceType: "module"
+    },
+    rules: {
+        "@next/next/no-html-link-for-pages": "off"
+    }
+};
