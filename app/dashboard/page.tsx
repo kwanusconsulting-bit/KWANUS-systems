@@ -1,150 +1,171 @@
 // app/dashboard/page.tsx
-import Link from "next/link";
-
 export default function DashboardPage() {
     return (
-        <div className="min-h-screen bg-slate-950 text-slate-50">
-            {/* Background glow */}
-            <div className="pointer-events-none fixed inset-0 -z-10">
-                <div className="absolute -top-40 left-10 h-80 w-80 rounded-full bg-emerald-500/25 blur-3xl" />
-                <div className="absolute top-40 right-0 h-96 w-96 rounded-full bg-sky-500/25 blur-3xl" />
-                <div className="absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-rose-500/20 blur-3xl" />
-            </div>
-
-            <header className="border-b border-white/10 bg-slate-950/70 backdrop-blur-xl">
-                <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-                    <div className="flex items-center gap-2">
-                        <div className="h-8 w-8 rounded-xl bg-emerald-400/20 border border-emerald-400/40 flex items-center justify-center text-xs font-semibold tracking-[0.2em] uppercase">
-                            OS
+        <div className="space-y-6">
+            {/* Emotional State Header */}
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-emerald-950/40 to-slate-900/40 p-6 backdrop-blur-xl">
+                <div className="absolute inset-0 bg-emerald-500/5" />
+                <div className="relative">
+                    <div className="flex items-center justify-between">
+                        <div>
+                            <p className="text-xs uppercase tracking-wider text-slate-400">Current State</p>
+                            <h2 className="mt-1 text-2xl font-semibold text-emerald-300">Steady & Clear</h2>
+                            <p className="mt-2 text-sm text-slate-300">
+                                The OS is pacing gently, focused on your next right action.
+                            </p>
                         </div>
-                        <div className="flex flex-col leading-tight">
-                            <span className="text-sm font-semibold tracking-[0.25em] uppercase text-slate-200">
-                                KWANUS
-                            </span>
-                            <span className="text-[11px] text-slate-400">
-                                Live Emotional Credit OS
-                            </span>
+                        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/20 ring-4 ring-emerald-500/10">
+                            <div className="h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_20px_rgba(52,211,153,0.8)]" />
                         </div>
-                    </div>
-                    <div className="flex items-center gap-3 text-xs text-slate-400">
-                        <span>Emotional State: Steady &amp; Clear</span>
-                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.9)]" />
                     </div>
                 </div>
-            </header>
+            </div>
 
-            <main className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-6 md:py-10">
-                {/* Top row: OS snapshot */}
-                <section className="grid gap-4 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
-                    <div className="rounded-[28px] border border-white/15 bg-slate-900/70 p-5 backdrop-blur-2xl shadow-[0_0_60px_rgba(15,23,42,1)]">
-                        <div className="flex items-center justify-between gap-4">
-                            <div>
-                                <p className="text-[11px] uppercase tracking-[0.2em] text-slate-400">
-                                    Live OS Snapshot
-                                </p>
-                                <p className="mt-1 text-sm text-slate-200">
-                                    Your credit, disputes, and funding in one emotional timeline.
-                                </p>
-                            </div>
-                            <Link
-                                href="/settings"
-                                className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[11px] text-slate-200 hover:bg-white/10"
-                            >
-                                Settings
-                            </Link>
+            {/* Stats Grid */}
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                <StatCard
+                    label="Credit Items"
+                    value="12"
+                    description="Tracked across bureaus"
+                    color="emerald"
+                />
+                <StatCard
+                    label="Open Disputes"
+                    value="3"
+                    description="In active motion"
+                    color="sky"
+                />
+                <StatCard
+                    label="Funding Apps"
+                    value="2"
+                    description="Awaiting decisions"
+                    color="amber"
+                />
+                <StatCard
+                    label="Documents"
+                    value="8"
+                    description="Securely stored"
+                    color="violet"
+                />
+            </div>
+
+            {/* Main Content Grid */}
+            <div className="grid gap-6 lg:grid-cols-3">
+                {/* Next Action - Takes 2 columns */}
+                <div className="lg:col-span-2">
+                    <div className="rounded-2xl border border-white/10 bg-slate-900/40 p-6 backdrop-blur-xl">
+                        <div className="flex items-center justify-between">
+                            <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-300">
+                                Next Right Action
+                            </h3>
+                            <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-300">
+                                Today
+                            </span>
                         </div>
-
-                        <div className="mt-4 grid gap-3 sm:grid-cols-4">
-                            <div className="rounded-2xl border border-white/10 bg-white/5 px-3 py-3 text-xs">
-                                <p className="text-[11px] uppercase tracking-[0.2em] text-slate-400">
-                                    Emotional State
-                                </p>
-                                <p className="mt-1 text-sm font-semibold text-emerald-300">
-                                    Steady &amp; Clear
-                                </p>
-                                <p className="mt-1 text-[11px] text-slate-400">
-                                    OS pacing is gentle, focused.
-                                </p>
-                            </div>
-                            <div className="rounded-2xl border border-white/10 bg-white/5 px-3 py-3 text-xs">
-                                <p className="text-[11px] uppercase tracking-[0.2em] text-slate-400">
-                                    Credit Items
-                                </p>
-                                <p className="mt-1 text-sm font-semibold text-slate-50">12</p>
-                                <p className="mt-1 text-[11px] text-slate-400">
-                                    All tracked across bureaus.
-                                </p>
-                            </div>
-                            <div className="rounded-2xl border border-white/10 bg-white/5 px-3 py-3 text-xs">
-                                <p className="text-[11px] uppercase tracking-[0.2em] text-slate-400">
-                                    Open Disputes
-                                </p>
-                                <p className="mt-1 text-sm font-semibold text-slate-50">3</p>
-                                <p className="mt-1 text-[11px] text-slate-400">
-                                    In active motion.
-                                </p>
-                            </div>
-                            <div className="rounded-2xl border border-white/10 bg-white/5 px-3 py-3 text-xs">
-                                <p className="text-[11px] uppercase tracking-[0.2em] text-slate-400">
-                                    Funding Apps
-                                </p>
-                                <p className="mt-1 text-sm font-semibold text-slate-50">2</p>
-                                <p className="mt-1 text-[11px] text-slate-400">
-                                    Awaiting decisions.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="mt-4 rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 text-xs text-slate-300">
-                            <div className="flex flex-wrap items-center justify-between gap-2">
-                                <span className="font-medium text-slate-100">
-                                    Next right action
-                                </span>
-                                <span className="rounded-full bg-emerald-400/10 px-2 py-0.5 text-[11px] text-emerald-200">
-                                    Today: Stabilize → One calm move
-                                </span>
-                            </div>
-                            <p className="mt-2">
-                                Review your dispute letter draft for Account #4321. The OS has
-                                already tracked the bureaus, dates, and documents—you only need
-                                to confirm and send.
+                        <div className="mt-4">
+                            <h4 className="text-lg font-medium text-white">
+                                Review dispute letter for Account #4321
+                            </h4>
+                            <p className="mt-2 text-sm leading-relaxed text-slate-400">
+                                The OS has already tracked the bureaus, dates, and documents—you only need
+                                to confirm and send. This is one calm, focused move.
                             </p>
+                            <button className="mt-4 rounded-xl bg-white/5 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-white/10 hover:shadow-lg">
+                                Review Letter →
+                            </button>
                         </div>
                     </div>
+                </div>
 
-                    {/* Right: Timeline / notifications */}
-                    <div className="space-y-3">
-                        <div className="rounded-2xl border border-white/15 bg-slate-900/70 p-4 backdrop-blur-2xl">
-                            <p className="text-[11px] uppercase tracking-[0.2em] text-slate-400">
-                                Timeline
-                            </p>
-                            <ul className="mt-3 space-y-2 text-xs text-slate-300">
-                                <li>
-                                    <span className="text-slate-100">2h ago</span> — Emotional state
-                                    updated to <span className="text-emerald-300">Steady &amp; Clear</span>.
-                                </li>
-                                <li>
-                                    <span className="text-slate-100">Yesterday</span> — Dispute created
-                                    for Experian collection.
-                                </li>
-                                <li>
-                                    <span className="text-slate-100">2 days ago</span> — Funding
-                                    application submitted to Community Lender.
-                                </li>
-                            </ul>
-                        </div>
-                        <div className="rounded-2xl border border-white/15 bg-slate-900/70 p-4 backdrop-blur-2xl text-xs text-slate-300">
-                            <p className="text-[11px] uppercase tracking-[0.2em] text-slate-400">
-                                Emotional Notes
-                            </p>
-                            <p className="mt-2">
-                                You told the OS you feel cautious but ready. We&apos;re keeping
-                                today&apos;s surface area small on purpose.
-                            </p>
-                        </div>
+                {/* Timeline Preview */}
+                <div className="rounded-2xl border border-white/10 bg-slate-900/40 p-6 backdrop-blur-xl">
+                    <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-300">
+                        Recent Activity
+                    </h3>
+                    <div className="mt-4 space-y-4">
+                        <TimelineItem
+                            time="2h ago"
+                            event="Emotional state updated"
+                            detail="Steady & Clear"
+                            color="emerald"
+                        />
+                        <TimelineItem
+                            time="Yesterday"
+                            event="Dispute created"
+                            detail="Experian collection"
+                            color="sky"
+                        />
+                        <TimelineItem
+                            time="2 days ago"
+                            event="Funding submitted"
+                            detail="Community Lender"
+                            color="amber"
+                        />
                     </div>
-                </section>
-            </main>
+                </div>
+            </div>
+
+            {/* Quick Links */}
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                <QuickLink href="/dashboard/credit-items" label="Credit Items" icon="📊" />
+                <QuickLink href="/dashboard/disputes" label="Disputes" icon="⚖️" />
+                <QuickLink href="/dashboard/funding" label="Funding" icon="💰" />
+                <QuickLink href="/dashboard/documents" label="Documents" icon="📄" />
+            </div>
         </div>
+    );
+}
+
+function StatCard({ label, value, description, color }: any) {
+    const colors = {
+        emerald: "from-emerald-500/10 to-emerald-500/5 border-emerald-500/20 text-emerald-300",
+        sky: "from-sky-500/10 to-sky-500/5 border-sky-500/20 text-sky-300",
+        amber: "from-amber-500/10 to-amber-500/5 border-amber-500/20 text-amber-300",
+        violet: "from-violet-500/10 to-violet-500/5 border-violet-500/20 text-violet-300",
+    };
+
+    return (
+        <div className={`rounded-2xl border bg-gradient-to-br p-5 backdrop-blur-xl ${colors[color]}`}>
+            <p className="text-xs uppercase tracking-wider text-slate-400">{label}</p>
+            <p className="mt-2 text-3xl font-bold">{value}</p>
+            <p className="mt-1 text-xs text-slate-400">{description}</p>
+        </div>
+    );
+}
+
+function TimelineItem({ time, event, detail, color }: any) {
+    const colors = {
+        emerald: "text-emerald-300",
+        sky: "text-sky-300",
+        amber: "text-amber-300",
+    };
+
+    return (
+        <div className="flex gap-3">
+            <div className="flex-shrink-0">
+                <div className="h-2 w-2 mt-1.5 rounded-full bg-white/40" />
+            </div>
+            <div className="flex-1 min-w-0">
+                <p className="text-xs text-slate-400">{time}</p>
+                <p className="text-sm font-medium text-white">{event}</p>
+                <p className={`text-sm ${colors[color]}`}>{detail}</p>
+            </div>
+        </div>
+    );
+}
+
+function QuickLink({ href, label, icon }: any) {
+    return (
+        <a
+            href={href}
+            className="group rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl transition-all hover:bg-white/10 hover:border-white/20"
+        >
+            <div className="flex items-center gap-3">
+                <span className="text-2xl">{icon}</span>
+                <span className="text-sm font-medium text-white group-hover:text-emerald-300 transition-colors">
+                    {label}
+                </span>
+            </div>
+        </a>
     );
 }
