@@ -1,75 +1,61 @@
+// app/pricing/page.tsx
 import MarketingLayout from "../marketing-layout";
-import Link from "next/link";
 
 export default function PricingPage() {
     return (
         <MarketingLayout>
-            <div className="mx-auto max-w-6xl px-4 py-16 space-y-16">
-                <header className="text-center space-y-4">
-                    <p className="text-xs font-medium tracking-[0.3em] uppercase text-cyan-300/80">
-                        ACCESS PARAMETERS
-                    </p>
-                    <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-slate-50">
-                        Simple, focused access.
-                    </h1>
-                    <p className="text-slate-400 max-w-2xl mx-auto">
-                        We believe in clarity. No hidden tiers, no complex matrices. Just one powerful OS.
-                    </p>
-                </header>
+            <section className="space-y-6">
+                <h1 className="text-3xl font-semibold tracking-tight text-slate-50">
+                    Pricing that respects your nervous system.
+                </h1>
+                <p className="max-w-2xl text-sm text-slate-300">
+                    No surprise fees. No hidden penalties. Just clear tiers that match where
+                    you are in your credit journey—and where you&apos;re ready to go next.
+                </p>
 
-                <div className="max-w-md mx-auto rounded-3xl border border-cyan-500/30 bg-slate-900/50 p-8 md:p-12 space-y-8 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 p-6">
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-cyan-400 bg-cyan-400/10 px-3 py-1 rounded-full border border-cyan-400/20">
-                            Professional
-                        </span>
+                <div className="mt-6 grid gap-6 md:grid-cols-3">
+                    <div className="rounded-2xl border border-white/10 bg-slate-900/70 p-5 backdrop-blur-xl">
+                        <h2 className="text-sm font-semibold text-slate-50">Steady</h2>
+                        <p className="mt-1 text-xs text-slate-400">
+                            For grounding and getting oriented.
+                        </p>
+                        <p className="mt-4 text-2xl font-semibold text-slate-50">$X/mo</p>
+                        <ul className="mt-4 space-y-2 text-xs text-slate-300">
+                            <li>Emotional state tracking</li>
+                            <li>Credit item overview</li>
+                            <li>Gentle next‑step prompts</li>
+                        </ul>
                     </div>
 
-                    <div className="space-y-2">
-                        <div className="flex items-baseline gap-1">
-                            <span className="text-5xl font-bold text-white">$99</span>
-                            <span className="text-slate-400">/mo</span>
-                        </div>
-                        <p className="text-sm text-slate-400">Full KWANUS OS Access</p>
+                    <div className="rounded-2xl border border-emerald-400/60 bg-emerald-400/10 p-5 backdrop-blur-xl shadow-[0_0_40px_rgba(52,211,153,0.5)]">
+                        <h2 className="text-sm font-semibold text-emerald-100">
+                            Progressing
+                        </h2>
+                        <p className="mt-1 text-xs text-emerald-100/80">
+                            For active dispute and funding motion.
+                        </p>
+                        <p className="mt-4 text-2xl font-semibold text-emerald-50">$Y/mo</p>
+                        <ul className="mt-4 space-y-2 text-xs text-emerald-50/90">
+                            <li>Dispute orchestration</li>
+                            <li>Funding application tracking</li>
+                            <li>Priority next‑action guidance</li>
+                        </ul>
                     </div>
 
-                    <ul className="space-y-4 text-sm text-slate-300">
-                        {[
-                            "Unlimited Credit Item tracking",
-                            "Advanced Dispute Round management",
-                            "Full Funding Pipeline tools",
-                            "Emotional Resonance Visuals",
-                            "Timeline & Relational Identity",
-                            "Priority Support from the Stewards"
-                        ].map((feat, i) => (
-                            <li key={i} className="flex items-center gap-3">
-                                <span className="text-emerald-400">✓</span>
-                                {feat}
-                            </li>
-                        ))}
-                    </ul>
-
-                    <Link
-                        href="/sign-up"
-                        className="block w-full rounded-full bg-cyan-400 py-4 text-center text-sm font-semibold text-slate-950 shadow-lg shadow-cyan-500/30 hover:bg-cyan-300 transition"
-                    >
-                        Begin Initialization
-                    </Link>
-
-                    <p className="text-center text-[11px] text-slate-500">
-                        Cancel anytime. The OS respects your choice.
-                    </p>
+                    <div className="rounded-2xl border border-white/10 bg-slate-900/70 p-5 backdrop-blur-xl">
+                        <h2 className="text-sm font-semibold text-slate-50">Thriving</h2>
+                        <p className="mt-1 text-xs text-slate-400">
+                            For long‑term stewardship and expansion.
+                        </p>
+                        <p className="mt-4 text-2xl font-semibold text-slate-50">$Z/mo</p>
+                        <ul className="mt-4 space-y-2 text-xs text-slate-300">
+                            <li>Long‑term credit strategy</li>
+                            <li>Funding ecosystem mapping</li>
+                            <li>Deep emotional‑OS integration</li>
+                        </ul>
+                    </div>
                 </div>
-
-                <section className="text-center space-y-6 pt-10 border-t border-slate-800">
-                    <h2 className="text-xl font-medium">Enterprise or Team access?</h2>
-                    <p className="text-sm text-slate-400">
-                        Need multiple seats for your consultancy? Contact our stewards for a custom configuration.
-                    </p>
-                    <Link href="/contact" className="inline-block text-cyan-400 text-sm hover:underline">
-                        Contact Stewardship →
-                    </Link>
-                </section>
-            </div>
+            </section>
         </MarketingLayout>
     );
 }

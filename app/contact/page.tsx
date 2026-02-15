@@ -1,75 +1,51 @@
+// app/contact/page.tsx
 import MarketingLayout from "../marketing-layout";
 
 export default function ContactPage() {
     return (
         <MarketingLayout>
-            <div className="mx-auto max-w-4xl px-4 py-16 space-y-16">
-                <header className="space-y-4">
-                    <p className="text-xs font-medium tracking-[0.3em] uppercase text-cyan-300/80">
-                        REACHING OUT
-                    </p>
-                    <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-slate-50">
-                        Connect with the Stewards.
+            <section className="grid gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
+                <div className="space-y-4">
+                    <h1 className="text-3xl font-semibold tracking-tight text-slate-50">
+                        Reach out when you&apos;re ready to move.
                     </h1>
-                    <p className="text-slate-400">
-                        Whether you have a question about the OS or need assistance with your journey, we are here.
+                    <p className="text-sm text-slate-300">
+                        KWANUS is a living OS, not a faceless portal. If you&apos;re a
+                        founder, practitioner, or steward who wants to bring this universe
+                        into your ecosystem, we&apos;d love to hear from you.
                     </p>
-                </header>
-
-                <div className="grid gap-12 md:grid-cols-[1.5fr_1fr]">
-                    <form className="space-y-6">
-                        <div className="space-y-2">
-                            <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Name</label>
-                            <input
-                                type="text"
-                                placeholder="Your name"
-                                className="w-full rounded-xl bg-slate-900 border border-slate-800 px-4 py-3 text-white focus:border-cyan-500/50 outline-none transition"
-                            />
-                        </div>
-
-                        <div className="space-y-2">
-                            <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Email</label>
-                            <input
-                                type="email"
-                                placeholder="steward@example.com"
-                                className="w-full rounded-xl bg-slate-900 border border-slate-800 px-4 py-3 text-white focus:border-cyan-500/50 outline-none transition"
-                            />
-                        </div>
-
-                        <div className="space-y-2">
-                            <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Message</label>
-                            <textarea
-                                rows={5}
-                                placeholder="How can we support your journey?"
-                                className="w-full rounded-xl bg-slate-900 border border-slate-800 px-4 py-3 text-white focus:border-cyan-500/50 outline-none transition"
-                            />
-                        </div>
-
-                        <button
-                            type="submit"
-                            className="w-full rounded-full bg-cyan-400 py-4 text-sm font-semibold text-slate-950 shadow-lg shadow-cyan-500/30 hover:bg-cyan-300 transition"
-                        >
-                            Send Message
-                        </button>
-                    </form>
-
-                    <div className="space-y-8">
-                        <div className="space-y-2">
-                            <h3 className="text-slate-100 font-semibold">Direct Email</h3>
-                            <p className="text-sm text-slate-400">steward@kwanus.com</p>
-                        </div>
-                        <div className="space-y-2">
-                            <h3 className="text-slate-100 font-semibold">Stewardship Hours</h3>
-                            <p className="text-sm text-slate-400">Monday — Friday<br />9:00 AM — 5:00 PM EST</p>
-                        </div>
-                        <div className="p-6 rounded-2xl bg-indigo-500/5 border border-indigo-500/10">
-                            <p className="text-xs text-indigo-300 italic leading-relaxed">
-                                &quot;The fastest way forward is often a single, clear question.&quot;
-                            </p>
-                        </div>
-                    </div>
                 </div>
-            </div>
+                <form className="space-y-3 rounded-2xl border border-white/10 bg-slate-900/70 p-4 backdrop-blur-xl">
+                    <div className="space-y-1">
+                        <label className="text-xs text-slate-300">Name</label>
+                        <input
+                            className="w-full rounded-lg border border-white/10 bg-slate-950/60 px-3 py-2 text-sm text-slate-50 outline-none focus:border-emerald-400/70"
+                            placeholder="Your name"
+                        />
+                    </div>
+                    <div className="space-y-1">
+                        <label className="text-xs text-slate-300">Email</label>
+                        <input
+                            className="w-full rounded-lg border border-white/10 bg-slate-950/60 px-3 py-2 text-sm text-slate-50 outline-none focus:border-emerald-400/70"
+                            placeholder="you@example.com"
+                        />
+                    </div>
+                    <div className="space-y-1">
+                        <label className="text-xs text-slate-300">What are you stewarding?</label>
+                        <textarea
+                            rows={4}
+                            className="w-full rounded-lg border border-white/10 bg-slate-950/60 px-3 py-2 text-sm text-slate-50 outline-none focus:border-emerald-400/70"
+                            placeholder="Tell us about your work, your people, and what you want this OS to hold."
+                        />
+                    </div>
+                    <button
+                        type="submit"
+                        className="w-full rounded-full bg-emerald-400 px-4 py-2 text-sm font-medium text-slate-950 shadow-[0_0_30px_rgba(52,211,153,0.6)] hover:bg-emerald-300 transition-colors"
+                    >
+                        Send message
+                    </button>
+                </form>
+            </section>
         </MarketingLayout>
     );
 }
