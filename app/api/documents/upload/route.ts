@@ -1,31 +1,61 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { auth } from "@clerk/nextjs/server";
 
 export async function POST(req: Request) {
-    const { userId } = await auth();
-
-    if (!userId) {
-        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
     try {
-        const { title, type, url, fundingId, disputeId } = await req.json();
+        const formData = await req.formData();
+        const file = formData.get("file") as File;
+        const userId = formData.get("userId") as string;
 
-        const doc = await prisma.document.create({
+        if (!file || !userId) {
+            return NextResponse.json({ error: "Missing file or user ID" }, { status: 400 });
+        }
+
+        // 1. Simulating File Storage (In production, upload to S3/Blob)
+        // const fileUrl = await uploadToStorage(file); 
+        const fileUrl = `https://storage.kwanus.com/uploads/${file.name}`; // Mock URL
+
+        // 2. Simulating OCR / Data Extraction
+        // const extractedData = await extractDataFromPDF(file);
+        const extractedData = {
+            creditor: "Chase Bank",
+            accountNumber: "****1234",
+            balance: "$4,500.00",
+            status: "Collection",
+            confidence: 0.99
+        };
+
+        // 3. Save to Database
+        const document = await prisma.document.create({
             data: {
                 userId,
-                title,
-                type,
-                url,
-                fundingId,
-                disputeId,
+                title: file.name,
+                type: file.type.includes("pdf") ? "application/pdf" : "image/jpeg",
+                url: fileUrl,
             },
         });
 
-        return NextResponse.json(doc);
+        // 4. Create Credit Item from Extraction
+        await prisma.creditItem.create({
+            data: {
+                userId,
+                creditorName: extractedData.creditor,
+                accountNumber: extractedData.accountNumber,
+                balance: parseFloat(extractedData.balance.replace(/[^0-9.]/g, "")),
+                status: extractedData.status,
+                isNegative: true,
+                reportId: document.id // Linking mock
+            }
+        });
+
+        return NextResponse.json({
+            success: true,
+            document,
+            extractedData
+        });
+
     } catch (error) {
-        console.error("Manifestation Error:", error);
-        return NextResponse.json({ error: "Failed to manifest document" }, { status: 500 });
+        console.error("Upload Error:", error);
+        return NextResponse.json({ error: "Upload failed" }, { status: 500 });
     }
 }
