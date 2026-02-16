@@ -1,0 +1,21 @@
+MESSAGE TO DEVELOPER (SEND THIS)
+
+I’m sending you the full execution framework for finishing the site TONIGHT.
+Follow the plan exactly as written.
+Do not skip steps.
+Do not deploy untested code.
+Do not push directly to main.
+Do not skip staging.
+
+Your job is to:
+1. Verify the environment
+2. Verify all core flows
+3. Verify stability
+4. Verify staging
+5. Deploy to production
+6. Verify production
+
+Your success metric:
+The site works perfectly on the first try.
+
+Begin immediately.
