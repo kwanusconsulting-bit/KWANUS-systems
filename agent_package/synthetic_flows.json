@@ -1,0 +1,51 @@
+{
+    "flow_id": "KWANUS-FLOWS-001",
+    "definitions": [
+        {
+            "name": "Upload -> Extract",
+            "steps": [
+                "upload_file(sample_pdf)",
+                "assert(file_received)",
+                "assert(extraction_success)",
+                "assert(coverage >= 0.99)"
+            ]
+        },
+        {
+            "name": "Generate Letter",
+            "steps": [
+                "generate_letter(template_id)",
+                "assert(placeholders_filled)",
+                "assert(no_undefined)",
+                "assert(pdf_export_success)"
+            ]
+        },
+        {
+            "name": "Signature",
+            "steps": [
+                "capture_signature()",
+                "save_signature()",
+                "attach_to_letter()",
+                "assert(signature_in_pdf)"
+            ]
+        },
+        {
+            "name": "Stripe Payment",
+            "steps": [
+                "create_checkout_session()",
+                "simulate_payment_success()",
+                "assert(subscription_active)",
+                "simulate_payment_failure()",
+                "assert(subscription_revoked)"
+            ]
+        },
+        {
+            "name": "Dashboard Load",
+            "steps": [
+                "login()",
+                "load_dashboard()",
+                "assert(all_sections_present)",
+                "assert(no_console_errors)"
+            ]
+        }
+    ]
+}

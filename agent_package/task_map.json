@@ -1,0 +1,61 @@
+{
+    "task_map_id": "KWANUS-TASKS-001",
+    "sprint": "Nightly Execution",
+    "tasks": [
+        {
+            "id": "T-ENV-001",
+            "priority": "critical",
+            "domain": "deployment",
+            "title": "Environment Setup Verification",
+            "criteria": [
+                "Staging/Prod exist",
+                "Env vars valid",
+                "DB connection verified"
+            ]
+        },
+        {
+            "id": "T-FILE-001",
+            "priority": "high",
+            "domain": "file_uploads",
+            "title": "File Upload + Extraction Validation",
+            "criteria": [
+                "PDF/Image upload works",
+                "Multi-page extraction verified",
+                "Coverage >= 99%"
+            ]
+        },
+        {
+            "id": "T-LETTER-001",
+            "priority": "high",
+            "domain": "letters",
+            "title": "Letter Engine Validation",
+            "criteria": [
+                "Templates load",
+                "Placeholders fill",
+                "PDF export works"
+            ]
+        },
+        {
+            "id": "T-PAY-001",
+            "priority": "high",
+            "domain": "payments",
+            "title": "Stripe Payment Validation",
+            "criteria": [
+                "Checkout session verified",
+                "Webhook sync verified",
+                "Subscription active"
+            ]
+        },
+        {
+            "id": "T-STAGE-001",
+            "priority": "critical",
+            "domain": "deployment",
+            "title": "Full Staging Verification",
+            "criteria": [
+                "Synthetic flows pass",
+                "Zero errors in logs",
+                "Health check green"
+            ]
+        }
+    ]
+}

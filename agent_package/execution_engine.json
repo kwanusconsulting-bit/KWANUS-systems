@@ -1,0 +1,49 @@
+{
+    "engine_id": "KWANUS-EXEC-001",
+    "priority_engine": {
+        "order": [
+            "CRITICAL: Upload -> Extract -> Letter -> Sign -> Pay",
+            "STABILITY: Dashboard -> Routing -> API -> DB",
+            "DEPLOYMENT: Staging -> Production",
+            "MONITORING: Errors -> Webhooks -> Performance"
+        ]
+    },
+    "decision_engine": {
+        "rules": [
+            {
+                "condition": "affects_critical_flow",
+                "action": "prioritize_immediately"
+            },
+            {
+                "condition": "affects_stability",
+                "action": "schedule_after_critical"
+            },
+            {
+                "condition": "affects_ui_only",
+                "action": "schedule_after_stability"
+            },
+            {
+                "condition": "affects_performance",
+                "action": "schedule_after_deployment"
+            }
+        ]
+    },
+    "fix_engine": {
+        "strategies": {
+            "local_error": "fix -> retest",
+            "staging_error": "fix -> redeploy -> retest",
+            "production_error": "rollback -> fix -> redeploy -> retest",
+            "stripe_error": "revalidate_webhook -> sync_subscription -> retest",
+            "extraction_error": "reprocess_file -> compare_coverage -> retest"
+        }
+    },
+    "speed_engine": {
+        "optimizations": [
+            "parallelize_tests",
+            "parallelize_validations",
+            "cache_dependencies",
+            "incremental_compilation",
+            "warm_staging_env"
+        ]
+    }
+}

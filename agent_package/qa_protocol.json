@@ -1,0 +1,42 @@
+{
+    "qa_protocol_id": "KWANUS-QA-001",
+    "automated_suites": [
+        {
+            "name": "Auth Flow",
+            "checks": [
+                "Login presence",
+                "Signup flow",
+                "Protected route redirect"
+            ]
+        },
+        {
+            "name": "Asset Pipeline",
+            "checks": [
+                "PDF upload integrity",
+                "OCR extraction accuracy",
+                "Data mapping"
+            ]
+        },
+        {
+            "name": "Legal Intelligence",
+            "checks": [
+                "Template generation",
+                "Signature embedding",
+                "PDF export integrity"
+            ]
+        },
+        {
+            "name": "Financial Sync",
+            "checks": [
+                "Checkout initialization",
+                "Webhook receipt",
+                "Subscription status"
+            ]
+        }
+    ],
+    "runtime_guards": {
+        "no_silent_500s": true,
+        "no_unhandled_rejections": true,
+        "strict_zod_validation": true
+    }
+}

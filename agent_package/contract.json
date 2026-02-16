@@ -1,0 +1,23 @@
+{
+    "contract_id": "KWANUS-AOS-001",
+    "version": "1.0.0",
+    "invariants": {
+        "main_branch_stable": true,
+        "no_untested_code": true,
+        "strict_typing": true,
+        "lint_clean": true,
+        "blocking_pipeline": true
+    },
+    "constraints": {
+        "no_silent_failures": true,
+        "no_skipping_staging": true,
+        "no_direct_edits_to_main": true,
+        "no_unverified_flows": true
+    },
+    "success_metrics": {
+        "zero_console_errors": true,
+        "zero_production_500s": true,
+        "all_tests_passing": true,
+        "deployment_confirmed": true
+    }
+}
