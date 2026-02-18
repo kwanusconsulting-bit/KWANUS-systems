@@ -4,6 +4,7 @@ import { generateMarketingCampaign } from "./producers/marketing";
 import { scanTextCompliance } from "./producers/compliance";
 import { assertProposalOnly } from "./guards";
 import { generateFundingCards } from "./producers/funding";
+import { generateMLCards } from "./producers/ml";
 
 const prisma = new PrismaClient();
 
@@ -144,6 +145,37 @@ export async function runMotherboard(tenantId: string): Promise<number> {
         }
     } catch (error) {
         console.error("Funding Producer Failed:", error);
+    }
+
+    // 5. ML Producer
+    try {
+        const mlCards = await generateMLCards(tenantId);
+        for (const card of mlCards) {
+            assertProposalOnly(card.proposal);
+            await prisma.decisionCard.create({
+                data: {
+                    userId: user.id,
+                    title: card.title,
+                    description: card.description,
+                    type: card.type,
+                    status: "PENDING",
+                    priority: card.priority,
+                    actionLabel: card.actionLabel
+                }
+            });
+            await prisma.eventLog.create({
+                data: {
+                    tenantId,
+                    userId: user.id,
+                    action: "MOTHERBOARD_ML_PROPOSAL",
+                    resource: "DecisionCard",
+                    metadata: JSON.stringify(card.proposal)
+                }
+            });
+            cardCount++;
+        }
+    } catch (error) {
+        console.error("ML Producer Failed:", error);
     }
 
     return cardCount;
