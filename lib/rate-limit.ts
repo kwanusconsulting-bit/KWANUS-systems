@@ -1,39 +1,57 @@
-const RATE_LIMIT = 20; // requests per window
 const WINDOW = 60 * 1000; // 1 minute
 
-const ipHits = new Map<string, { count: number; timestamp: number }>();
+// Per-route limits (requests per window)
+const ROUTE_LIMITS: Record<string, number> = {
+    auth: 10,
+    billing: 5,
+    ml: 30,
+    motherboard: 5,
+    default: 20
+};
 
-export function rateLimit(ip: string): boolean {
+const ipRouteHits = new Map<string, { count: number; timestamp: number }>();
+
+/**
+ * Rate limit by IP + route category.
+ * Returns true if request is allowed, false if limit exceeded.
+ */
+export function rateLimitRoute(ip: string, route: string): boolean {
+    const limit = ROUTE_LIMITS[route] ?? ROUTE_LIMITS.default;
+    const key = `${ip}:${route}`;
     const now = Date.now();
-    const entry = ipHits.get(ip);
+    const entry = ipRouteHits.get(key);
 
     if (!entry) {
-        ipHits.set(ip, { count: 1, timestamp: now });
+        ipRouteHits.set(key, { count: 1, timestamp: now });
         return true;
     }
 
-    // Reset if window has passed
     if (now - entry.timestamp > WINDOW) {
-        ipHits.set(ip, { count: 1, timestamp: now });
+        ipRouteHits.set(key, { count: 1, timestamp: now });
         return true;
     }
 
-    // Reject if limit exceeded
-    if (entry.count >= RATE_LIMIT) {
+    if (entry.count >= limit) {
         return false;
     }
 
-    // Increment counter
     entry.count++;
     return true;
 }
 
-// Cleanup old entries periodically (optional but recommended)
+/**
+ * Legacy: general rate limit (20/min, no route distinction).
+ */
+export function rateLimit(ip: string): boolean {
+    return rateLimitRoute(ip, "default");
+}
+
+// Cleanup old entries every minute
 setInterval(() => {
     const now = Date.now();
-    for (const [ip, data] of ipHits.entries()) {
+    for (const [key, data] of ipRouteHits.entries()) {
         if (now - data.timestamp > WINDOW) {
-            ipHits.delete(ip);
+            ipRouteHits.delete(key);
         }
     }
 }, WINDOW);
