@@ -1,6 +1,8 @@
 {
-    "buildCommand": "prisma generate && npm run build",
-    "installCommand": "npm install --legacy-peer-deps",
-    "outputDirectory": ".next",
-    "framework": "nextjs"
+    "crons": [
+        {
+            "path": "/api/cron/motherboard",
+            "schedule": "0 */6 * * *"
+        }
+    ]
 }

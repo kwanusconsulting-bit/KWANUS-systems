@@ -410,18 +410,23 @@ model Tenant {
 }
 
 model DecisionCard {
-  id          String   @id @default(cuid())
+  id          String    @id @default(cuid())
   userId      String
-  user        User     @relation(fields: [userId], references: [id])
+  user        User      @relation(fields: [userId], references: [id])
   title       String
   description String?
-  status      String   @default("PENDING") // PENDING, ACTIONED, DISMISSED
-  type        String   @default("INFO") // INFO, ACTION, URGENT
+  status      String    @default("PENDING") // PENDING | APPROVED | REJECTED | HOLD | EXPIRED
+  type        String    @default("INFO")    // INFO | ACTION | URGENT | CFO | MARKETING | COMPLIANCE | FUNDING | ML
   actionLabel String?
   actionUrl   String?
-  priority    Int      @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  priority    Int       @default(0)
+  requestId   String?
+  expiresAt   DateTime?
+  approvedAt  DateTime?
+  rejectedAt  DateTime?
+  heldAt      DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
 
 model EventLog {
@@ -435,6 +440,13 @@ model EventLog {
   ip        String?
   userAgent String?
   createdAt DateTime @default(now())
+}
+
+model MotherboardLock {
+  id        String   @id @default(cuid())
+  tenantId  String   @unique
+  lockedAt  DateTime @default(now())
+  expiresAt DateTime
 }
 
 model FinanceSnapshot {
