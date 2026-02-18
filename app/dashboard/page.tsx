@@ -8,10 +8,12 @@ import { narrativeBeats } from "@/lib/narrative";
 import { generateMeta } from "@/lib/meta";
 import { formatTimeline, TimelineEvent } from "@/lib/timeline";
 import Link from "next/link";
+import { auth } from "@clerk/nextjs/server";
+import { prisma } from "@/lib/prisma";
 // import { generateConstructs } from "@/lib/constructs";
 // import { TheCenter } from "@/components/os/TheCenter";
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
     // TEMP: Hardcoded until backend is wired
     const identity = createIdentity({
         name: "Ka’Moni",
@@ -50,7 +52,25 @@ export default function DashboardPage() {
 
     // Mock Tenant Plan for Packet 8 Paywall Logic
     // In production, this comes from the DB via server component/auth
-    const tenant = { plan: "FREE" }; // Change to "STARTER" or "PRO" to test signed-in view
+    // Packet 8.1: Secure Paywall - utilizing server-side auth + prisma
+    let plan = "FREE";
+    const { userId } = await auth();
+
+    if (userId) {
+        try {
+            const user = await prisma.user.findUnique({
+                where: { clerkUserId: userId },
+                include: { tenant: true }
+            });
+            if (user?.tenant?.plan) {
+                plan = user.tenant.plan;
+            }
+        } catch (e) {
+            console.error("Failed to fetch tenant plan", e);
+        }
+    }
+
+    // const tenant = { plan: "FREE" }; // REMOVED MOCK
 
     const activeEvents = cosmicEvents.filter(e => e.trigger(osState, memory));
     const beats = narrativeBeats.filter(e => e.trigger(osState, memory));
@@ -123,7 +143,7 @@ export default function DashboardPage() {
                         <p className="text-sm text-white/60 mb-6">{card.description}</p>
 
                         <div className="mt-auto">
-                            {tenant.plan === "FREE" ? (
+                            {plan === "FREE" ? (
                                 <Link href="/billing?reason=upgrade" className="block w-full py-3 rounded-lg bg-white/5 border border-white/10 text-center text-sm font-medium hover:bg-white/10 transition flex items-center justify-center gap-2">
                                     <span>🔒 Preview Action</span>
                                 </Link>
