@@ -451,3 +451,63 @@ model FinanceSnapshot {
   @@unique([tenantId, period])
   @@index([tenantId, createdAt])
 }
+
+// --------------------------------------
+// CREDITOR INTELLIGENCE (Packet 3)
+// --------------------------------------
+
+model Creditor {
+  id         String   @id @default(cuid())
+  createdAt  DateTime @default(now())
+
+  name       String
+  normalized String   @unique
+  category   String?
+
+  addresses  CreditorAddress[]
+  bureauRules BureauRule[]
+  outcomes   DisputeOutcome[]
+
+  @@index([name])
+}
+
+model CreditorAddress {
+  id         String   @id @default(cuid())
+  creditorId String
+  creditor   Creditor @relation(fields: [creditorId], references: [id], onDelete: Cascade)
+
+  bureau     String   // EX, EQ, TU
+  address    String
+  active     Boolean  @default(true)
+
+  @@index([bureau])
+}
+
+model BureauRule {
+  id         String   @id @default(cuid())
+  creditorId String
+  creditor   Creditor @relation(fields: [creditorId], references: [id], onDelete: Cascade)
+
+  bureau     String
+  notes      String?
+  preferredDisputeType String?
+
+  @@index([bureau])
+}
+
+model DisputeOutcome {
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+
+  creditorId  String
+  creditor    Creditor @relation(fields: [creditorId], references: [id], onDelete: Cascade)
+
+  bureau      String
+  disputeType String
+  result      String   // VERIFIED, DELETED, UPDATED
+  daysToResponse Int?
+
+  @@index([creditorId])
+  @@index([bureau])
+}
+
