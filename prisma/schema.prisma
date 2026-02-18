@@ -403,6 +403,7 @@ model Tenant {
   name      String
   slug      String   @unique
   users     User[]
+  financeSnapshots FinanceSnapshot[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -433,4 +434,20 @@ model EventLog {
   ip        String?
   userAgent String?
   createdAt DateTime @default(now())
+}
+
+model FinanceSnapshot {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  tenantId  String
+  tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  period    String   // e.g. "2026-02"
+  revenue   Int      // cents
+  expenses  Int      // cents
+  notes     String?
+
+  @@unique([tenantId, period])
+  @@index([tenantId, createdAt])
 }

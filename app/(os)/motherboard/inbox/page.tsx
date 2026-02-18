@@ -48,13 +48,63 @@ export default function InboxPage() {
         }
     };
 
+    const [running, setRunning] = useState(false);
+
+    const handleRunMotherboard = async () => {
+        setRunning(true);
+        try {
+            await fetch("/api/motherboard/run", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({}) });
+            // Refresh cards
+            const res = await fetch("/api/decision-cards");
+            const data = await res.json();
+            if (Array.isArray(data)) setCards(data);
+        } catch (err) {
+            console.error("Run failed", err);
+        } finally {
+            setRunning(false);
+        }
+    };
+
+    const handleExportAudit = async () => {
+        try {
+            const res = await fetch("/api/audit/export");
+            const data = await res.json();
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `audit-${new Date().toISOString().slice(0, 10)}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        } catch (err) {
+            console.error("Export failed", err);
+        }
+    };
+
     if (loading) return <div className="p-8 text-white/50">Loading Inbox...</div>;
 
     return (
         <div className="p-8 space-y-6 max-w-4xl mx-auto">
-            <header className="mb-8">
-                <h1 className="text-3xl font-black italic uppercase tracking-tighter text-white">Inbox</h1>
-                <p className="text-sm font-bold tracking-[0.2em] text-white/40 uppercase">Decision & Action Center</p>
+            <header className="mb-8 flex items-start justify-between">
+                <div>
+                    <h1 className="text-3xl font-black italic uppercase tracking-tighter text-white">Inbox</h1>
+                    <p className="text-sm font-bold tracking-[0.2em] text-white/40 uppercase">Decision &amp; Action Center</p>
+                </div>
+                <div className="flex gap-3">
+                    <button
+                        onClick={handleRunMotherboard}
+                        disabled={running}
+                        className="px-5 py-2 text-xs font-black uppercase tracking-widest bg-violet-500/20 text-violet-400 hover:bg-violet-500/30 rounded-lg transition-colors border border-violet-500/20 disabled:opacity-40"
+                    >
+                        {running ? "Running..." : "Run Motherboard"}
+                    </button>
+                    <button
+                        onClick={handleExportAudit}
+                        className="px-5 py-2 text-xs font-black uppercase tracking-widest bg-white/10 text-white/60 hover:bg-white/20 rounded-lg transition-colors border border-white/10"
+                    >
+                        Export Audit
+                    </button>
+                </div>
             </header>
 
             <div className="space-y-4">
