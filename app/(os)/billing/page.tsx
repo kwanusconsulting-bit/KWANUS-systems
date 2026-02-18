@@ -53,7 +53,13 @@ export default function BillingPage() {
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-8 flex flex-col">
                     <h2 className="text-xl font-semibold mb-2">Starter</h2>
                     <p className="text-white/60 mb-6 flex-grow">Essential dispute resolution tools.</p>
-                    <div className="text-3xl font-bold mb-6">$49<span className="text-sm text-white/40 font-normal">/mo</span></div>
+                    <div className="text-3xl font-bold mb-6">$29<span className="text-sm text-white/40 font-normal">/mo</span></div>
+                    <ul className="space-y-3 mb-8 text-sm text-white/70">
+                        <li>✓ Monthly Credit Report Audit</li>
+                        <li>✓ Basic Dispute Templates</li>
+                        <li>✓ Funding Readiness Score</li>
+                        <li>✓ Manual Motherboard Runs</li>
+                    </ul>
                     <button
                         onClick={() => handleSubscribe("STARTER")}
                         disabled={!!loadingAction}
@@ -69,6 +75,13 @@ export default function BillingPage() {
                     <h2 className="text-xl font-semibold mb-2 text-indigo-300">Pro</h2>
                     <p className="text-white/60 mb-6 flex-grow">Advanced AI strategy and full automation.</p>
                     <div className="text-3xl font-bold mb-6">$99<span className="text-sm text-white/40 font-normal">/mo</span></div>
+                    <ul className="space-y-3 mb-8 text-sm text-white/90">
+                        <li>✓ Weekly Auto-Analysis</li>
+                        <li>✓ ML-Powered Strategy</li>
+                        <li>✓ Unlimited Disputes</li>
+                        <li>✓ Priority Processing</li>
+                        <li>✓ Funding Simulator</li>
+                    </ul>
                     <button
                         onClick={() => handleSubscribe("PRO")}
                         disabled={!!loadingAction}

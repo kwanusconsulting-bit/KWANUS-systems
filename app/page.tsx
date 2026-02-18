@@ -1,196 +1,92 @@
-// app/page.tsx
-import React from "react";
+import Link from "next/link";
 
 export default function HomePage() {
     return (
-        <main className="min-h-screen bg-slate-950 text-slate-50 flex flex-col">
-            {/* Glow background */}
-            <div className="pointer-events-none fixed inset-0 -z-10">
-                <div className="absolute -top-40 -left-40 h-80 w-80 rounded-full bg-emerald-500/20 blur-3xl" />
-                <div className="absolute -bottom-40 -right-40 h-80 w-80 rounded-full bg-cyan-500/25 blur-3xl" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(148,163,184,0.15),_transparent_55%)]" />
-            </div>
-
-            {/* Top nav */}
-            <header className="w-full border-b border-white/5 bg-slate-950/70 backdrop-blur-xl">
-                <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-                    <div className="flex items-center gap-2">
-                        <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-emerald-400 via-cyan-400 to-sky-500 shadow-lg shadow-emerald-500/40" />
-                        <div className="flex flex-col leading-tight">
-                            <span className="text-xs font-semibold tracking-[0.2em] text-emerald-300/80">
-                                KWANUS
-                            </span>
-                            <span className="text-[0.7rem] text-slate-400">
-                                Emotionally Intelligent Credit OS
-                            </span>
-                        </div>
+        <main className="min-h-screen bg-[#0a0a0f] text-white selection:bg-indigo-500/30">
+            {/* Nav */}
+            <nav className="border-b border-white/5 backdrop-blur-md sticky top-0 z-50">
+                <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+                    <div className="font-bold tracking-tight flex items-center gap-2">
+                        <div className="w-3 h-3 bg-indigo-500 rounded-full animate-pulse" />
+                        KWANUS OS
                     </div>
-
-                    <nav className="hidden items-center gap-6 text-sm text-slate-300 md:flex">
-                        <button className="hover:text-emerald-300 transition-colors">
-                            Features
-                        </button>
-                        <button className="hover:text-emerald-300 transition-colors">
-                            Pricing
-                        </button>
-                        <button className="hover:text-emerald-300 transition-colors">
-                            About
-                        </button>
-                        <button className="hover:text-emerald-300 transition-colors">
-                            Contact
-                        </button>
-                    </nav>
-
-                    <div className="flex items-center gap-3">
-                        <button className="rounded-full border border-slate-600/70 px-4 py-1.5 text-xs font-medium text-slate-200 hover:border-emerald-400/80 hover:text-emerald-200 transition-colors">
-                            Sign in
-                        </button>
-                        <button className="rounded-full bg-gradient-to-tr from-emerald-400 via-cyan-400 to-sky-500 px-4 py-1.5 text-xs font-semibold text-slate-950 shadow-lg shadow-emerald-500/40 hover:brightness-110 transition">
-                            Get started
-                        </button>
+                    <div className="flex items-center gap-6 text-sm font-medium">
+                        <Link href="/onboarding" className="text-white/60 hover:text-white transition">Sign In</Link>
+                        <Link href="/onboarding" className="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 transition">
+                            Get Started
+                        </Link>
                     </div>
                 </div>
-            </header>
+            </nav>
 
-            {/* Hero + snapshot */}
-            <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-10 px-4 py-10 md:flex-row md:items-center">
-                {/* Left: copy */}
-                <section className="flex-1 space-y-6">
-                    <p className="text-[0.7rem] font-semibold uppercase tracking-[0.25em] text-emerald-300/80">
-                        Emotionally Intelligent Credit Operating System
-                    </p>
-
-                    <h1 className="text-3xl font-semibold tracking-tight text-slate-50 sm:text-4xl md:text-5xl">
-                        Not a dashboard.
-                        <span className="block bg-gradient-to-r from-emerald-300 via-cyan-300 to-sky-400 bg-clip-text text-transparent">
-                            A living OS for your credit and emotions.
-                        </span>
+            <div className="flex flex-col items-center justify-center pt-20 pb-32 px-4">
+                {/* Hero */}
+                <section className="text-center max-w-4xl mx-auto mb-32">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-indigo-300 mb-8">
+                        <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
+                        System Operational • v1.0
+                    </div>
+                    <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent">
+                        The Operating System<br />for Credit Engineering
                     </h1>
-
-                    <p className="max-w-xl text-sm leading-relaxed text-slate-300">
-                        KWANUS turns your credit, disputes, funding, and identity into a
-                        single emotionally aware operating system—so you always know what’s
-                        next, without overwhelm, chaos, or guesswork.
+                    <p className="text-lg md:text-xl text-white/50 mb-12 max-w-2xl mx-auto leading-relaxed">
+                        Automate the dispute process. Optimize your funding readiness.<br />
+                        Consulting-grade intelligence, built for you.
                     </p>
-
-                    <div className="flex flex-wrap items-center gap-3 pt-2">
-                        <button className="rounded-full bg-slate-50 px-5 py-2 text-xs font-semibold text-slate-950 shadow-lg shadow-emerald-500/30 hover:bg-slate-200 transition">
-                            Enter the OS
-                        </button>
-                        <button className="rounded-full border border-slate-600/70 px-5 py-2 text-xs font-medium text-slate-200 hover:border-emerald-400/80 hover:text-emerald-200 transition">
-                            Explore how it works →
-                        </button>
-                    </div>
-
-                    <div className="grid gap-4 pt-4 text-xs text-slate-300 sm:grid-cols-3">
-                        <div className="space-y-1">
-                            <p className="font-semibold text-slate-100">Emotional Intelligence</p>
-                            <p className="text-[0.7rem] text-slate-400">
-                                Your emotional state is part of the system. The OS adapts tone,
-                                visuals, and pacing to where you actually are.
-                            </p>
-                        </div>
-                        <div className="space-y-1">
-                            <p className="font-semibold text-slate-100">Unified Credit Story</p>
-                            <p className="text-[0.7rem] text-slate-400">
-                                Credit items, disputes, and funding apps live in one coherent
-                                timeline—no more scattered portals.
-                            </p>
-                        </div>
-                        <div className="space-y-1">
-                            <p className="font-semibold text-slate-100">Guided, Not Overwhelming</p>
-                            <p className="text-[0.7rem] text-slate-400">
-                                The OS surfaces the next right action instead of dumping
-                                everything on you at once.
-                            </p>
-                        </div>
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <Link href="/onboarding" className="px-8 py-4 rounded-full bg-white text-black font-semibold hover:bg-gray-200 transition w-full sm:w-auto flex items-center justify-center gap-2">
+                            Initialize System <span className="text-black/40">→</span>
+                        </Link>
+                        <Link href="/transparency" className="px-8 py-4 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition w-full sm:w-auto">
+                            How it Works
+                        </Link>
                     </div>
                 </section>
 
-                {/* Right: Live OS Snapshot card */}
-                <section className="flex-1">
-                    <div className="relative">
-                        <div className="absolute -inset-0.5 rounded-3xl bg-gradient-to-tr from-emerald-400/40 via-cyan-400/30 to-sky-500/40 opacity-70 blur-xl" />
-                        <div className="relative rounded-3xl border border-white/10 bg-slate-900/70 p-5 shadow-2xl shadow-emerald-500/30 backdrop-blur-2xl">
-                            <div className="flex items-center justify-between gap-4">
-                                <div className="space-y-1">
-                                    <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-emerald-300/80">
-                                        Live OS Snapshot
-                                    </p>
-                                    <p className="text-xs text-slate-300">
-                                        Your credit, disputes, and funding in one emotional timeline.
-                                    </p>
-                                </div>
-                                <span className="rounded-full bg-emerald-400/15 px-3 py-1 text-[0.65rem] font-medium text-emerald-200 border border-emerald-400/40">
-                                    KWANUS OS • Steady &amp; Clear
-                                </span>
-                            </div>
+                {/* Pricing */}
+                <section className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-8 mb-32">
+                    <div className="p-8 rounded-3xl border border-white/10 bg-white/5 flex flex-col">
+                        <h3 className="text-xl font-semibold mb-2">Starter</h3>
+                        <p className="text-white/50 text-sm mb-6">Essential monitoring and manual tools.</p>
+                        <div className="text-4xl font-bold mb-8">$29<span className="text-sm font-normal text-white/40">/mo</span></div>
+                        <ul className="space-y-4 mb-8 flex-grow">
+                            {["Monthly Credit Audit", "Basic Dispute Templates", "Funding Readiness Score", "Manual Motherboard Runs"].map((f, i) => (
+                                <li key={i} className="flex gap-3 text-sm text-white/70">
+                                    <span className="text-indigo-400">✓</span> {f}
+                                </li>
+                            ))}
+                        </ul>
+                        <Link href="/onboarding" className="w-full py-4 rounded-xl bg-white/10 hover:bg-white/20 text-center font-medium transition">
+                            Get Started
+                        </Link>
+                    </div>
 
-                            <div className="mt-5 grid gap-4 text-xs text-slate-200 sm:grid-cols-2">
-                                <div className="space-y-1 rounded-2xl border border-white/10 bg-slate-900/70 p-3">
-                                    <p className="text-[0.65rem] uppercase tracking-[0.18em] text-slate-400">
-                                        Emotional State
-                                    </p>
-                                    <p className="text-sm font-semibold text-emerald-300">
-                                        Steady &amp; Clear
-                                    </p>
-                                    <p className="text-[0.7rem] text-slate-400">
-                                        OS pacing is gentle, focused.
-                                    </p>
-                                </div>
-
-                                <div className="space-y-1 rounded-2xl border border-white/10 bg-slate-900/70 p-3">
-                                    <p className="text-[0.65rem] uppercase tracking-[0.18em] text-slate-400">
-                                        Credit Items
-                                    </p>
-                                    <p className="text-sm font-semibold text-slate-50">12</p>
-                                    <p className="text-[0.7rem] text-slate-400">
-                                        Tracked across bureaus.
-                                    </p>
-                                </div>
-
-                                <div className="space-y-1 rounded-2xl border border-white/10 bg-slate-900/70 p-3">
-                                    <p className="text-[0.65rem] uppercase tracking-[0.18em] text-slate-400">
-                                        Open Disputes
-                                    </p>
-                                    <p className="text-sm font-semibold text-amber-300">3</p>
-                                    <p className="text-[0.7rem] text-slate-400">
-                                        In active motion.
-                                    </p>
-                                </div>
-
-                                <div className="space-y-1 rounded-2xl border border-white/10 bg-slate-900/70 p-3">
-                                    <p className="text-[0.65rem] uppercase tracking-[0.18em] text-slate-400">
-                                        Funding Apps
-                                    </p>
-                                    <p className="text-sm font-semibold text-cyan-300">2</p>
-                                    <p className="text-[0.7rem] text-slate-400">
-                                        In review, emotionally paced.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div className="mt-5 space-y-3 rounded-2xl border border-emerald-400/30 bg-emerald-400/5 p-3">
-                                <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-emerald-300/90">
-                                    Today’s focus
-                                </p>
-                                <p className="text-xs font-medium text-slate-50">
-                                    Stabilize → Move one calm step forward.
-                                </p>
-                                <p className="text-[0.7rem] text-slate-300">
-                                    The OS has already accounted for your disputes, funding, and
-                                    emotional state. You don’t have to hold everything in your
-                                    head—just follow the next right action.
-                                </p>
-                            </div>
-
-                            <div className="mt-4 flex items-center justify-between text-[0.65rem] text-slate-500">
-                                <span>Not a dashboard. A living operating system.</span>
-                                <span className="text-slate-400">© 2026 KWANUS Systems LLC</span>
-                            </div>
-                        </div>
+                    <div className="p-8 rounded-3xl border border-indigo-500/30 bg-indigo-500/5 flex flex-col relative overflow-hidden">
+                        <div className="absolute top-0 right-0 bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-bl-xl">RECOMMENDED</div>
+                        <h3 className="text-xl font-semibold mb-2 text-indigo-300">Pro</h3>
+                        <p className="text-white/50 text-sm mb-6">Full automation and strategy engine.</p>
+                        <div className="text-4xl font-bold mb-8">$99<span className="text-sm font-normal text-white/40">/mo</span></div>
+                        <ul className="space-y-4 mb-8 flex-grow">
+                            {["Weekly Auto-Analysis", "ML-Powered Strategy", "Unlimited Disputes", "Priority Processing", "Funding Simulator"].map((f, i) => (
+                                <li key={i} className="flex gap-3 text-sm text-white/90">
+                                    <span className="text-indigo-400">✓</span> {f}
+                                </li>
+                            ))}
+                        </ul>
+                        <Link href="/onboarding" className="w-full py-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-center font-medium transition shadow-lg shadow-indigo-500/20">
+                            Get Started
+                        </Link>
                     </div>
                 </section>
+
+                <footer className="w-full max-w-6xl border-t border-white/5 pt-10 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-white/30">
+                    <div>© 2026 KWANUS Systems LLC</div>
+                    <div className="flex gap-6">
+                        <Link href="/transparency" className="hover:text-white transition">Transparency & Rights</Link>
+                        <Link href="#" className="hover:text-white transition">Terms</Link>
+                        <Link href="#" className="hover:text-white transition">Privacy</Link>
+                    </div>
+                </footer>
             </div>
         </main>
     );

@@ -7,6 +7,7 @@ import { cosmicEvents } from "@/lib/cosmicEvents";
 import { narrativeBeats } from "@/lib/narrative";
 import { generateMeta } from "@/lib/meta";
 import { formatTimeline, TimelineEvent } from "@/lib/timeline";
+import Link from "next/link";
 // import { generateConstructs } from "@/lib/constructs";
 // import { TheCenter } from "@/components/os/TheCenter";
 
@@ -46,6 +47,10 @@ export default function DashboardPage() {
     const meta = generateMeta(osState, memory);
     const { steward, universe, destiny, rituals } = meta;
     // const constructs = generateConstructs(osState, memory);
+
+    // Mock Tenant Plan for Packet 8 Paywall Logic
+    // In production, this comes from the DB via server component/auth
+    const tenant = { plan: "FREE" }; // Change to "STARTER" or "PRO" to test signed-in view
 
     const activeEvents = cosmicEvents.filter(e => e.trigger(osState, memory));
     const beats = narrativeBeats.filter(e => e.trigger(osState, memory));
@@ -101,47 +106,35 @@ export default function DashboardPage() {
                 </div>
             </header>
 
-            {/* Snapshot grid */}
-            <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-10">
-                {/* Emotional State */}
-                <div className={`relative rounded-3xl border border-white/10 bg-gradient-to-br ${gradients.card} p-5 shadow-xl backdrop-blur-2xl transition-all duration-500 hover:border-white/20`}>
-                    <p className="text-[0.65rem] uppercase tracking-[0.18em] text-slate-400 mb-1">
-                        Emotional State
-                    </p>
-                    <p className={`text-xl font-semibold ${gradients.accent}`}>
-                        {summary.emotionalBadge.charAt(0).toUpperCase() + summary.emotionalBadge.slice(1)}
-                    </p>
-                    <p className="mt-1 text-[0.6rem] text-slate-400">
-                        {persona.pacing}
-                    </p>
-                </div>
+            {/* Action Cards & Paywall Logic */}
+            <section className="grid md:grid-cols-3 gap-6 mb-10">
+                {/* Mocked Motherboard Output Cards */}
+                {[
+                    { id: "card-1", title: "Dispute: Experian #4921", priority: "HIGH", description: "Inaccurate late payment reporting found.", action: "Generate Letter" },
+                    { id: "card-2", title: "Funding: Application Ready", priority: "MEDIUM", description: "Credit utilization checks passed.", action: "Start Application" },
+                    { id: "card-3", title: "Identity: Address Mismatch", priority: "LOW", description: "Old address found on TransUnion.", action: "Update Profile" }
+                ].map((card, i) => (
+                    <div key={card.id} className="p-6 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition group relative overflow-hidden">
+                        <div className="flex items-center gap-2 mb-4">
+                            <div className={`w-2 h-2 rounded-full ${card.priority === 'HIGH' ? 'bg-red-500' : card.priority === 'MEDIUM' ? 'bg-amber-500' : 'bg-blue-500'}`} />
+                            <span className="text-xs font-bold tracking-wider text-white/50">{card.priority} PRIORITY</span>
+                        </div>
+                        <h3 className="text-lg font-semibold mb-2">{card.title}</h3>
+                        <p className="text-sm text-white/60 mb-6">{card.description}</p>
 
-                {/* Credit Items */}
-                <div className={`relative rounded-3xl border border-white/10 bg-gradient-to-br ${gradients.card} p-5 shadow-xl backdrop-blur-2xl transition-all duration-500 hover:border-white/20`}>
-                    <p className="text-[0.65rem] uppercase tracking-[0.18em] text-slate-400 mb-1">
-                        Credit Items
-                    </p>
-                    <p className="text-xl font-semibold text-slate-50">12</p>
-                    <p className="mt-1 text-[0.6rem] text-slate-400">Tracked across bureaus.</p>
-                </div>
-
-                {/* Disputes */}
-                <div className={`relative rounded-3xl border border-white/10 bg-gradient-to-br ${gradients.card} p-5 shadow-xl backdrop-blur-2xl transition-all duration-500 hover:border-white/20`}>
-                    <p className="text-[0.65rem] uppercase tracking-[0.18em] text-slate-400 mb-1">
-                        Open Disputes
-                    </p>
-                    <p className={`text-xl font-semibold ${gradients.accent}`}>3</p>
-                    <p className="mt-1 text-[0.6rem] text-slate-400">In active motion.</p>
-                </div>
-
-                {/* Funding */}
-                <div className={`relative rounded-3xl border border-white/10 bg-gradient-to-br ${gradients.card} p-5 shadow-xl backdrop-blur-2xl transition-all duration-500 hover:border-white/20`}>
-                    <p className="text-[0.65rem] uppercase tracking-[0.18em] text-slate-400 mb-1">
-                        Funding Apps
-                    </p>
-                    <p className="text-xl font-semibold text-cyan-300">2</p>
-                    <p className="mt-1 text-[0.6rem] text-slate-400">Awaiting decisions.</p>
-                </div>
+                        <div className="mt-auto">
+                            {tenant.plan === "FREE" ? (
+                                <Link href="/billing?reason=upgrade" className="block w-full py-3 rounded-lg bg-white/5 border border-white/10 text-center text-sm font-medium hover:bg-white/10 transition flex items-center justify-center gap-2">
+                                    <span>🔒 Preview Action</span>
+                                </Link>
+                            ) : (
+                                <button className="block w-full py-3 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-center text-sm font-medium hover:bg-emerald-500/30 transition">
+                                    {card.action}
+                                </button>
+                            )}
+                        </div>
+                    </div>
+                ))}
             </section>
 
             {/* Perspective / Today's Focus Card */}
