@@ -404,6 +404,7 @@ model Tenant {
   slug      String   @unique
   users     User[]
   financeSnapshots FinanceSnapshot[]
+  fundingReadiness FundingReadiness?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -511,3 +512,26 @@ model DisputeOutcome {
   @@index([bureau])
 }
 
+// --------------------------------------
+// FUNDING INTELLIGENCE (Packet 4)
+// --------------------------------------
+
+model FundingReadiness {
+  id            String   @id @default(cuid())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  tenantId      String   @unique
+  tenant        Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  personalScore Int?
+  utilization   Float?
+  inquiries6m   Int?
+  openAccounts  Int?
+  negativeItems Int?
+
+  readinessScore Int?
+  readinessBand  String?  // LOW | MODERATE | STRONG
+
+  lastSimulatedAt DateTime?
+}

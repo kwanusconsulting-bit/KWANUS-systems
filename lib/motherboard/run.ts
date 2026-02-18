@@ -3,6 +3,7 @@ import { generateCFOCards } from "./producers/cfo";
 import { generateMarketingCampaign } from "./producers/marketing";
 import { scanTextCompliance } from "./producers/compliance";
 import { assertProposalOnly } from "./guards";
+import { generateFundingCards } from "./producers/funding";
 
 const prisma = new PrismaClient();
 
@@ -112,6 +113,37 @@ export async function runMotherboard(tenantId: string): Promise<number> {
         }
     } catch (error) {
         console.error("Compliance Producer Failed:", error);
+    }
+
+    // 4. Funding Producer
+    try {
+        const fundingCards = await generateFundingCards(tenantId);
+        for (const card of fundingCards) {
+            assertProposalOnly(card.proposal);
+            await prisma.decisionCard.create({
+                data: {
+                    userId: user.id,
+                    title: card.title,
+                    description: card.description,
+                    type: card.type,
+                    status: "PENDING",
+                    priority: card.priority,
+                    actionLabel: card.actionLabel
+                }
+            });
+            await prisma.eventLog.create({
+                data: {
+                    tenantId,
+                    userId: user.id,
+                    action: "MOTHERBOARD_FUNDING_PROPOSAL",
+                    resource: "DecisionCard",
+                    metadata: JSON.stringify(card.proposal)
+                }
+            });
+            cardCount++;
+        }
+    } catch (error) {
+        console.error("Funding Producer Failed:", error);
     }
 
     return cardCount;
