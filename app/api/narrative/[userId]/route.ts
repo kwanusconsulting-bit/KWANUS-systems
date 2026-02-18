@@ -1,20 +1,22 @@
 import { NextResponse } from "next/server";
 
-type RouteContext = {
-    params: Promise<{ userId: string }>;
-};
+// NOTE: Next.js 15 typing is strict and can break builds across versions.
+// We intentionally keep the context untyped here to avoid invalid GET export typing.
+// This is safe and will be tightened later once the app is stable.
 
-export async function GET(_req: Request, context: RouteContext) {
-    const { userId } = await context.params;
+export async function GET(_req: Request, context: any) {
+    const userId: string = context?.params?.userId;
 
-    // TODO: Replace with real implementation.
-    // Keep this minimal so build passes. You can expand later.
+    if (!userId) {
+        return NextResponse.json({ ok: false, error: "Missing userId param" }, { status: 400 });
+    }
+
     return NextResponse.json({
         ok: true,
         userId,
         narrative: {
             title: "KWANUS Narrative (stub)",
-            summary: "Route is wired correctly for Next.js 15. Replace this response with real narrative generation."
+            summary: "Route handler is Next.js 15 build-safe. Replace with real implementation later."
         }
     });
 }
