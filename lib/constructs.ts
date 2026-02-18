@@ -18,7 +18,7 @@ export interface OSConstructs {
     currentForge?: Construct;
 }
 
-export function generateConstructs(state: OSState, memory: EmotionalMemory): OSConstructs {
+export function generateConstructs(_state: OSState, _memory: EmotionalMemory): OSConstructs {
     // The Center: The First Construct
     // It is the anchor, the stabilizer, and the primary operational surface.
     const center: Construct = {

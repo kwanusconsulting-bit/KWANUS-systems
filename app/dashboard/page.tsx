@@ -7,8 +7,8 @@ import { cosmicEvents } from "@/lib/cosmicEvents";
 import { narrativeBeats } from "@/lib/narrative";
 import { generateMeta } from "@/lib/meta";
 import { formatTimeline, TimelineEvent } from "@/lib/timeline";
-import { generateConstructs } from "@/lib/constructs";
-import { TheCenter } from "@/components/os/TheCenter";
+// import { generateConstructs } from "@/lib/constructs";
+// import { TheCenter } from "@/components/os/TheCenter";
 
 export default function DashboardPage() {
     // TEMP: Hardcoded until backend is wired
@@ -45,7 +45,7 @@ export default function DashboardPage() {
 
     const meta = generateMeta(osState, memory);
     const { steward, universe, destiny, rituals } = meta;
-    const constructs = generateConstructs(osState, memory);
+    // const constructs = generateConstructs(osState, memory);
 
     const activeEvents = cosmicEvents.filter(e => e.trigger(osState, memory));
     const beats = narrativeBeats.filter(e => e.trigger(osState, memory));

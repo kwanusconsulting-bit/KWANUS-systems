@@ -13,13 +13,13 @@ export const mythicLaws: MythicLaw[] = [
         name: "Law of Emotional Gravity",
         description:
             "The OS must always move at the user's emotional pace. No acceleration without resonance.",
-        appliesWhen: (state) => true,
+        appliesWhen: () => true,
     },
     {
         name: "Law of Gentle Openings",
         description:
             "Every flow begins with grounding. No user is thrown into complexity without ceremony.",
-        appliesWhen: (state) => true,
+        appliesWhen: () => true,
     },
     {
         name: "Law of Contraction",
@@ -43,12 +43,12 @@ export const mythicLaws: MythicLaw[] = [
         name: "Law of Attuned Presence",
         description:
             "The OS must always reflect the user's emotional state back to them with clarity and compassion.",
-        appliesWhen: (state) => true,
+        appliesWhen: () => true,
     },
     {
         name: "Law of Mythic Continuity",
         description:
             "The OS must never reset, fragment, or break the lineage of the user's journey.",
-        appliesWhen: (state) => true,
+        appliesWhen: () => true,
     },
 ];

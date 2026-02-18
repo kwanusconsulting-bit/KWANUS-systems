@@ -1,8 +1,8 @@
 // lib/microcopy.ts
 
 import { EmotionalState } from "./emotion";
-import { PersonaResponse } from "./persona";
-import { getTone } from "./tone";
+import { Persona } from "./persona";
+// import { getTone } from "./tone";
 
 export interface MicroCopy {
     buttons: {
@@ -31,9 +31,9 @@ export interface MicroCopy {
 
 export function generateMicroCopy(
     emotion: EmotionalState,
-    persona: PersonaResponse
+    persona: Persona
 ): MicroCopy {
-    const tone = getTone(emotion);
+    // const tone = getTone(emotion);
 
     return {
         buttons: {

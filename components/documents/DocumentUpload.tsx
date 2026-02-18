@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { GlassCard, GlassInput } from "@/components/ui";
+import { GlassCard } from "@/components/ui";
+// import { GlassInput } from "@/components/ui";
 
 interface DocumentUploadProps {
     onComplete?: () => void;

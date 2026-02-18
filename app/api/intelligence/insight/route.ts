@@ -34,7 +34,7 @@ export async function GET() {
                     orderBy: { createdAt: 'desc' },
                     take: 5
                 },
-                fundingApplications: {
+                fundings: {
                     orderBy: { createdAt: 'desc' },
                     take: 5
                 },
@@ -50,14 +50,15 @@ export async function GET() {
             return NextResponse.json({ message: "Identity sync in progress..." });
         }
 
+
         // Simple intelligence logic (expandable)
-        if (user.disputes.some((d) => d.stage === "drafting")) {
+        if (user.disputes.some((d) => d.status === "OPEN")) {
             return NextResponse.json({
                 message: "You have dispute drafts ready. The next step is sending them.",
             });
         }
 
-        if (user.fundingApplications.some((f) => f.status === "pending")) {
+        if (user.fundings.some((f) => f.status === "PENDING")) {
             return NextResponse.json({
                 message: "Your funding application is in review. Patience is momentum.",
             });
@@ -66,7 +67,7 @@ export async function GET() {
         if (user.notifications.length > 0) {
             const latest = user.notifications[0];
             return NextResponse.json({
-                message: latest.title,
+                message: latest.message,
             });
         }
 

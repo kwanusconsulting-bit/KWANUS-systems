@@ -1,16 +1,20 @@
 // lib/notifications.ts
 
-import { EmotionalState } from "./emotion";
+// import { EmotionalState } from "./emotion";
 import { OSState } from "./himalaya";
 
 export interface Notification {
     id: string;
-    title: string;
-    body: string;
-    priority: "low" | "medium" | "high";
-    emotionalWeight: "light" | "neutral" | "heavy";
-    timestamp: Date;
+    title?: string;
+    message: string;
+    type?: string;
+    priority?: "low" | "medium" | "high";
+    emotionalWeight?: "light" | "neutral" | "heavy";
+    createdAt: Date;
+    read?: boolean;
 }
+
+export type NotificationType = string;
 
 export function generateNotifications(state: OSState): Notification[] {
     const notifications: Notification[] = [];
@@ -28,12 +32,12 @@ export function generateNotifications(state: OSState): Notification[] {
         notifications.push({
             id: "dispute-active",
             title: "Your dispute is moving",
-            body: pacing <= 2
+            message: pacing <= 2
                 ? "We’ll keep this gentle. You can review it when you’re ready."
                 : "Your dispute is in motion — review the latest update.",
             priority: pacing <= 2 ? "low" : "medium",
             emotionalWeight: pacing <= 2 ? "light" : "neutral",
-            timestamp: new Date(),
+            createdAt: new Date(),
         });
     }
 
@@ -42,12 +46,12 @@ export function generateNotifications(state: OSState): Notification[] {
         notifications.push({
             id: "funding-pending",
             title: "A lender needs one more document",
-            body: pacing <= 2
+            message: pacing <= 2
                 ? "No rush — we’ll surface this again when you’re steadier."
                 : "Upload your income verification to keep things moving.",
             priority: pacing <= 2 ? "low" : "high",
             emotionalWeight: pacing <= 2 ? "light" : "heavy",
-            timestamp: new Date(),
+            createdAt: new Date(),
         });
     }
 
@@ -55,7 +59,7 @@ export function generateNotifications(state: OSState): Notification[] {
     notifications.push({
         id: "emotion-update",
         title: "Your emotional state has shifted",
-        body:
+        message:
             state.emotion === "worst"
                 ? "We’ll keep today small and grounded."
                 : state.emotion === "neutral"
@@ -65,7 +69,7 @@ export function generateNotifications(state: OSState): Notification[] {
                         : "You’re thriving — expansion is open.",
         priority: "low",
         emotionalWeight: "light",
-        timestamp: new Date(),
+        createdAt: new Date(),
     });
 
     return notifications;

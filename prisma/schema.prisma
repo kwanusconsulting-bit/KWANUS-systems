@@ -38,6 +38,12 @@ model User {
   emotionalHistory EmotionalRecord[]
   personaHistory   PersonaState[]
   kernelStates     KernelState[]
+
+  // Kernel Relations
+  tenantId         String?
+  tenant           Tenant?       @relation(fields: [tenantId], references: [id])
+  decisionCards    DecisionCard[]
+  eventLogs        EventLog[]
 }
 
 model KernelState {
@@ -386,4 +392,45 @@ model Journey {
   status      String   @default("ACTIVE") // ACTIVE, COMPLETED, ARCHIVED
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+// --------------------------------------
+// KERNEL MODELS (Day 1-2)
+// --------------------------------------
+
+model Tenant {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  users     User[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DecisionCard {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  title       String
+  description String?
+  status      String   @default("PENDING") // PENDING, ACTIONED, DISMISSED
+  type        String   @default("INFO") // INFO, ACTION, URGENT
+  actionLabel String?
+  actionUrl   String?
+  priority    Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model EventLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  tenantId  String?
+  action    String
+  resource  String
+  metadata  String?  // JSON stringified
+  ip        String?
+  userAgent String?
+  createdAt DateTime @default(now())
 }

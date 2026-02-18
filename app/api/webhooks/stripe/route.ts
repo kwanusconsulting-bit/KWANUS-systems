@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    apiVersion: "2024-10-28.acacia",
+    apiVersion: "2026-01-28.clover",
 });
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
@@ -24,7 +24,7 @@ export async function POST(req: Request) {
     }
 
     const session = event.data.object as Stripe.Checkout.Session;
-    const subscription = event.data.object as Stripe.Subscription;
+    // const subscription = event.data.object as Stripe.Subscription;
 
     if (event.type === "checkout.session.completed") {
         const userId = session.metadata?.userId;
@@ -40,7 +40,7 @@ export async function POST(req: Request) {
 
     if (event.type === "invoice.payment_succeeded") {
         // Handle successful recurring payment
-        const customerId = subscription.customer as string;
+        // const customerId = subscription.customer as string;
         // Lookup user by customerId and update status
     }
 

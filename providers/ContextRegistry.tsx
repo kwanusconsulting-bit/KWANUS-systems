@@ -4,6 +4,8 @@ import React, { ReactNode } from 'react';
 import { ThemeProvider } from './ThemeProvider';
 import { DeviceProvider } from './DeviceProvider';
 import { RitualProvider } from './RitualProvider';
+import { AuthProvider } from '@/components/auth/AuthProvider';
+import { EmotionalIntelligenceProvider } from '@/context/EmotionalIntelligenceProvider';
 
 interface RegistryProps {
     children: ReactNode;
@@ -14,7 +16,11 @@ export const ContextRegistry = ({ children }: RegistryProps) => {
         <ThemeProvider>
             <DeviceProvider>
                 <RitualProvider>
-                    {children}
+                    <AuthProvider>
+                        <EmotionalIntelligenceProvider>
+                            {children}
+                        </EmotionalIntelligenceProvider>
+                    </AuthProvider>
                 </RitualProvider>
             </DeviceProvider>
         </ThemeProvider>

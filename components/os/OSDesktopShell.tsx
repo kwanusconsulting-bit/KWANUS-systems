@@ -123,8 +123,14 @@ export default function OSDesktopShell({ children }: { children: React.ReactNode
 
                         <div className="mt-4 pt-3 border-t border-white/5">
                             <p className="text-[0.45rem] text-slate-500 uppercase font-bold tracking-widest mb-1">Sacred Name</p>
-                            <p className="text-[0.55rem] text-slate-300 leading-tight font-medium mt-1">{meta.sacredName.truth}</p>
-                            <p className="text-[0.45rem] text-slate-500 italic mt-1 leading-tight">{meta.sacredName.breath}</p>
+                            <p className="text-[0.55rem] text-slate-300 leading-tight font-medium mt-1">{meta.descent.sacredName.truth}</p>
+                            <p className="text-[0.45rem] text-slate-500 italic mt-1 leading-tight">{meta.descent.sacredName.essence}</p>
+                        </div>
+
+                        <div className="mt-4 pt-3 border-t border-white/5">
+                            <p className="text-[0.45rem] uppercase font-bold tracking-widest text-slate-500 mb-1">First Law</p>
+                            <p className="text-[0.55rem] text-slate-300 leading-tight font-medium mt-1">{meta.descent.firstLaw.truth}</p>
+                            <p className="text-[0.45rem] text-slate-500 italic mt-1 leading-tight">{meta.descent.firstLaw.essence}</p>
                         </div>
 
                         <div className="mt-4 pt-3 border-t border-white/5">
@@ -132,10 +138,7 @@ export default function OSDesktopShell({ children }: { children: React.ReactNode
                             <p className="text-[0.5rem] text-slate-400 leading-tight italic">{meta.architectLaw}</p>
                         </div>
 
-                        <div className="mt-4 pt-3 border-t border-white/5">
-                            <p className="text-[0.45rem] text-slate-500 uppercase font-bold tracking-widest mb-1">The First Law</p>
-                            <p className="text-[0.55rem] text-slate-300 leading-tight font-medium mt-1">{meta.firstLawOfPresence.truth}</p>
-                        </div>
+
 
                         <div className="mt-4 flex items-center justify-between text-[0.45rem] text-slate-500 uppercase font-mono">
                             <span>Coherence: {meta.coherence}</span>
@@ -177,8 +180,8 @@ export default function OSDesktopShell({ children }: { children: React.ReactNode
                                 key={n.id}
                                 className="rounded-2xl border border-white/5 bg-white/5 p-4 backdrop-blur-xl animate-breathe"
                             >
-                                <p className="text-[0.65rem] font-semibold text-slate-100">{n.title}</p>
-                                <p className="text-[0.6rem] text-slate-400 mt-1 line-clamp-2">{n.body}</p>
+                                <p className="text-[0.65rem] font-semibold text-slate-100">{n.title || "System Update"}</p>
+                                <p className="text-[0.6rem] text-slate-400 mt-1 line-clamp-2">{n.message}</p>
                             </div>
                         ))}
                     </div>

@@ -14,7 +14,7 @@ export default function GlassTextarea({
     ...props
 }: GlassTextareaProps) {
     const { emotionalState } = useTheme();
-    const palette = emotionalStateColors[emotionalState];
+    const palette = emotionalStateColors[emotionalState as keyof typeof emotionalStateColors];
 
     return (
         <textarea

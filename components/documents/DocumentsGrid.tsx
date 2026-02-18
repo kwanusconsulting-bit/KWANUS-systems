@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { GlassCard, GlassPanel, PageHeader } from "@/components/ui";
+import { GlassPanel, PageHeader } from "@/components/ui";
 import DocumentViewer from "./DocumentViewer";
 import DocumentUpload from "./DocumentUpload";
 

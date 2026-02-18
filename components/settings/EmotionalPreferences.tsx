@@ -2,7 +2,7 @@
 
 import { GlassPanel } from "@/components/ui";
 
-export default function EmotionalPreferences({ user }: any) {
+export default function EmotionalPreferences() {
     // Mock states since state management is global via Context
     const states = [
         { key: "WORST", label: "Steady & Clear", color: "bg-sky-500" },

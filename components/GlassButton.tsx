@@ -16,7 +16,7 @@ export default function GlassButton({
     ...props
 }: GlassButtonProps) {
     const { emotionalState } = useTheme();
-    const palette = emotionalStateColors[emotionalState];
+    const palette = emotionalStateColors[emotionalState as keyof typeof emotionalStateColors];
 
     return (
         <button

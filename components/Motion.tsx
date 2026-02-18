@@ -15,7 +15,7 @@ export default function Motion({
     as?: any;
 }) {
     const { emotionalState } = useTheme();
-    const motion = motionTokens[emotionalState];
+    const motion = motionTokens[emotionalState as keyof typeof motionTokens];
 
     return (
         <Tag

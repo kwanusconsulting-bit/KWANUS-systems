@@ -5,7 +5,7 @@ import { OSState } from "@/lib/himalaya";
 import { generateCeremony } from "@/lib/ceremony";
 import { createIdentity } from "@/lib/identity";
 import { generatePersona } from "@/lib/persona";
-import { generateMicroCopy } from "@/lib/microcopy";
+// import { generateMicroCopy } from "@/lib/microcopy";
 
 export default function RepairCeremonyPage() {
     // TEMP: Hardcoded until backend is wired
@@ -30,7 +30,7 @@ export default function RepairCeremonyPage() {
 
     const ceremony = generateCeremony(osState);
     const persona = generatePersona(osState);
-    const micro = generateMicroCopy(emotionalState, persona);
+    // const micro = generateMicroCopy(emotionalState, persona);
 
     return (
         <main className="min-h-screen bg-slate-950 text-slate-50 px-6 py-10">

@@ -7,9 +7,18 @@ import {
     DisputeStatus,
     RoundStatus,
     EmotionalState,
-    TimelineEventType,
+    // TimelineEventType,
     BureauStatus,
 } from "@prisma/client";
+
+
+export enum TimelineEventType {
+    STATUS_CHANGED = "STATUS_CHANGED",
+    ROUND_CREATED = "ROUND_CREATED",
+    ROUND_SUBMITTED = "ROUND_SUBMITTED",
+    EVIDENCE_ADDED = "EVIDENCE_ADDED",
+    BUREAU_RESPONSE = "BUREAU_RESPONSE",
+}
 
 // -----------------------------
 // EMOTIONAL-ADAPTIVE PACING
@@ -163,10 +172,34 @@ export async function addTimelineEvent(
     type: TimelineEventType,
     message: string
 ) {
+    // 1. Fetch dispute to get userId
+    const dispute = await prisma.dispute.findUnique({
+        where: { id: disputeId },
+        select: { userId: true },
+    });
+
+    if (!dispute) {
+        console.error(`Timeline event failed: Dispute ${disputeId} not found`);
+        return null;
+    }
+
+    // 2. Derive title from type
+    const titles: Record<TimelineEventType, string> = {
+        [TimelineEventType.STATUS_CHANGED]: "Status Update",
+        [TimelineEventType.ROUND_CREATED]: "New Round Started",
+        [TimelineEventType.ROUND_SUBMITTED]: "Round Submitted",
+        [TimelineEventType.EVIDENCE_ADDED]: "Evidence Uploaded",
+        [TimelineEventType.BUREAU_RESPONSE]: "Bureau Response Received",
+    };
+
+    const title = titles[type] || "System Event";
+
     return prisma.timelineEvent.create({
         data: {
             disputeId,
-            type,
+            userId: dispute.userId,
+            title,
+            type: type.toString(), // Convert enum to string if schema expects string
             message,
         },
     });

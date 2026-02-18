@@ -1,7 +1,8 @@
 "use client";
 
 import { useTheme } from "@/providers/ThemeProvider";
-import { GlassPanel, GlassButton, PersonaText, GlassCard } from "@/components/ui";
+import { GlassPanel, PersonaText, GlassCard } from "@/components/ui";
+// import { GlassButton } from "@/components/ui";
 
 export default function StepPersona({ onNext }: any) {
     const { setPersonaMode } = useTheme();

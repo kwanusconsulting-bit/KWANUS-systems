@@ -2,7 +2,7 @@
 
 import { OSState } from "./himalaya";
 
-export interface PersonaResponse {
+export interface Persona {
     presence: string;
     demeanor: string;
     guidanceStyle: string;
@@ -10,7 +10,7 @@ export interface PersonaResponse {
     affirmation: string;
 }
 
-export function generatePersona(state: OSState): PersonaResponse {
+export function generatePersona(state: OSState): Persona {
     const { emotion } = state;
 
     switch (emotion) {

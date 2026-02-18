@@ -7,7 +7,7 @@ import { useTheme } from "@/providers/ThemeProvider";
 
 export default function NextRightAction() {
     const [next, setNext] = useState("Scanning horizon...");
-    const [loading, setLoading] = useState(true);
+    // const [loading, setLoading] = useState(true);
     const { emotionalState } = useTheme();
 
     useEffect(() => {
@@ -17,9 +17,10 @@ export default function NextRightAction() {
                 const data = await res.json();
                 setNext(data.next || "All current threads are stable.");
             } catch (e) {
-                setNext("Waiting for signal...");
+                setNext("System stable. Awaiting directive.");
+                // setLoading(false);
             } finally {
-                setLoading(false);
+                // setLoading(false);
             }
         }
         fetchNext();
