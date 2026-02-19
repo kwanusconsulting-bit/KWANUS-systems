@@ -1,17 +1,21 @@
 import { NextResponse } from "next/server";
 
-export async function GET(
-    _req: Request,
-    { params }: { params: Promise<{ userId: string }> }
-) {
-    const { userId } = await params;
+export async function GET(req: Request) {
+    // Extract userId from URL so Next cannot infer RouteContext typing.
+    const url = new URL(req.url);
+    const parts = url.pathname.split("/").filter(Boolean);
+    const userId = parts[parts.length - 1];
+
+    if (!userId) {
+        return NextResponse.json({ ok: false, error: "Missing userId param" }, { status: 400 });
+    }
 
     return NextResponse.json({
         ok: true,
         userId,
         narrative: {
             title: "KWANUS Narrative (stub)",
-            summary: "Route handler is Next.js 15 build-safe."
+            summary: "Build-safe handler. Replace with real implementation after launch."
         }
     });
 }
